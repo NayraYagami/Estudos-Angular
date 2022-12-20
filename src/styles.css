@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.rosa {
+  color: #f785d4;
+}
+
+.rosa-escuro {
+  color: #753f65;
+}
+
+.v-middle {
+  vertical-align: middle;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.msg-error {
+  background-color: black;
+  color: red;
+}
+
+.msg-success {
+  background-color: #753f65;
+  color: #fff;
+}

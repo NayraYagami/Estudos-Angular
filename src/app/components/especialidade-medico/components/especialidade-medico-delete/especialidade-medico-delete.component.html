@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-title>Excluir Especialidade Médico</mat-card-title>
+  <form>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Id médico"
+        [value]="especialidadeMedico.medicoId"
+        name="medicoId"
+        disabled="true"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Id especialidade"
+        [value]="especialidadeMedico.especialidadeId"
+        name="especialidadeId"
+        disabled="true"
+      />
+    </mat-form-field>
+  </form>
+  <button
+    mat-raised-button
+    (click)="deleteEspecialidadeMedico()"
+    color="accent"
+  >
+    Excluir
+  </button>
+  <button mat-raised-button (click)="cancel()">Cancelar</button>
+</mat-card>

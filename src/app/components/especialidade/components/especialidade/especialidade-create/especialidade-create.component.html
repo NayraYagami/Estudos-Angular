@@ -1,0 +1,18 @@
+<mat-card class="formulario">
+  <mat-card-title class="title-form">Dados da especialidade:</mat-card-title>
+  <form>
+    <mat-form-field color="primary" class="input-form">
+      <input
+        matInput
+        placeholder="Descrição"
+        [(ngModel)]="especialidade.descricao"
+        name="Descrição"
+      />
+    </mat-form-field>
+  </form>
+  <button mat-raised-button (click)="createEspecialidade()" color="accent">
+    Salvar
+  </button>
+
+  <button mat-raised-button (click)="cancel()">Cancelar</button>
+</mat-card>

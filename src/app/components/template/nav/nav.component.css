@@ -1,0 +1,21 @@
+.sidenav {
+  background-color: #753f65;
+  width: 12.5rem;
+}
+
+.sidenav a {
+  color: #ffbeeb;
+}
+
+.sidenav i {
+  padding-right: 0.625rem;
+}
+
+.content {
+  padding: 1rem;
+  background-color: white;
+  color: black;
+}
+.material-icons {
+  color: #f785d4;
+}

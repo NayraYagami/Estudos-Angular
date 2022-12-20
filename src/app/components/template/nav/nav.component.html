@@ -1,0 +1,39 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav
+    class="sidenav"
+    mode="side"
+    opened="true"
+    fixedInViewport="true"
+    fixedTopGap="64"
+  >
+    <mat-nav-list class="nav-list">
+      <a mat-list-item routerLink="/">
+        <i class="material-icons"> home </i>
+        Home
+      </a>
+      <a mat-list-item routerLink="/agendamento">
+        <i class="material-icons"> event_note </i>
+        Agendamento
+      </a>
+      <a mat-list-item routerLink="/cliente">
+        <i class="material-icons"> person_add </i>
+        Cliente
+      </a>
+      <a mat-list-item routerLink="/medico">
+        <i class="material-icons"> local_hospital </i>
+        Médico
+      </a>
+      <a mat-list-item routerLink="/especialidade">
+        <i class="material-icons"> stars</i>
+        Especialidade
+      </a>
+      <a mat-list-item routerLink="/especialidadeMedico">
+        <i class="material-icons"> folder_special </i>
+        Especialidade-Médico
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

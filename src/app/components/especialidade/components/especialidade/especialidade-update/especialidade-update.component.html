@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-title>Atualizar dados da especialidade:</mat-card-title>
+  <form>
+    <mat-form-field color="primary" class="input-form">
+      <input
+        matInput
+        placeholder="Descrição"
+        [(ngModel)]="especialidade.descricao"
+        name="Descrição"
+      />
+    </mat-form-field>
+    <mat-form-field class="input-form">
+      <input
+        matInput
+        placeholder="Id da especialidade(apenas para caso de atualização)"
+        [(ngModel)]="especialidade.id"
+        name="Id"
+        disabled
+      />
+    </mat-form-field>
+  </form>
+  <button mat-raised-button (click)="updateEspecialidade()" color="accent">
+    Atualizar
+  </button>
+
+  <button mat-raised-button (click)="cancel()">Cancelar</button>
+</mat-card>
