@@ -1,0 +1,104 @@
+<mat-card>
+  <mat-card-title>Nova Especialidade Médico</mat-card-title>
+  <form>
+    <mat-form-field>
+      <label for="crm">Crm:</label>
+      <input matInput placeholder="Crm" [(ngModel)]="medico.crm" name="crm" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="id">Id da pessoa:</label>
+      <input
+        matInput
+        placeholder="Id pessoa (caso já tenha cadastro)"
+        [(ngModel)]="medico.pessoa.id"
+        name="id"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="nome">Nome:</label>
+      <input
+        matInput
+        placeholder="Nome "
+        [(ngModel)]="medico.pessoa.nome"
+        name="nome"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="dataNascimento">Data de nascimento:</label>
+      <input
+        matInput
+        placeholder="Data de nascimento"
+        [(ngModel)]="medico.pessoa.dataNascimento"
+        name="dataNascimento"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="sexo">Sexo:</label>
+      <input
+        matInput
+        placeholder="Sexo"
+        [(ngModel)]="medico.pessoa.sexo"
+        name="sexo"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="cpf">Cpf:</label>
+      <input
+        matInput
+        placeholder="Cpf"
+        [(ngModel)]="medico.pessoa.cpf"
+        name="cpf"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="peso">Peso</label>
+      <input
+        matInput
+        placeholder="Peso"
+        [(ngModel)]="medico.pessoa.peso"
+        name="peso"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Altura"
+        [(ngModel)]="medico.pessoa.altura"
+        name="altura"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Data de criação"
+        [(ngModel)]="medico.dataCriacao"
+        name="dataCriacao"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Data de exclusão"
+        [(ngModel)]="medico.dataExclusao"
+        name="dataExclusao"
+      />
+    </mat-form-field>
+  </form>
+  <button
+    mat-raised-button
+    (click)="createEspecialidadeMedico()"
+    color="accent"
+  >
+    Salvar
+  </button>
+  <button mat-raised-button (click)="cancel()">Cancelar</button>
+</mat-card>
