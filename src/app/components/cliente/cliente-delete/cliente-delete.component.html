@@ -1,0 +1,131 @@
+<mat-card>
+  <mat-card-title>Dados do Médico:</mat-card-title>
+  <form [formGroup]="formGroupCliente">
+    <div formGroupName="pessoa" class="cliente-pessoa">
+      <mat-form-field class="form-group">
+        <label for="id">Id da pessoa:</label>
+        <input
+          matInput
+          placeholder="Id pessoa (caso já tenha cadastro)"
+          formControlName="id"
+          id="id"
+          name="id"
+          [(ngModel)]="cliente.pessoa.id"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="nome">Nome:</label>
+        <input
+          matInput
+          placeholder="Nome "
+          formControlName="nome"
+          id="nome"
+          name="nome"
+          [(ngModel)]="cliente.pessoa.nome"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="dataNascimento">Data de nascimento:</label>
+        <input
+          matInput
+          class="form-control"
+          name="dataNascimento"
+          id="dataNascimento"
+          formControlName="dataNascimento"
+          [(ngModel)]="cliente.pessoa.dataNascimento"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-check">
+        <label>Sexo:</label>
+        <div class="form-check">
+          <input
+            matInput
+            name="sexo"
+            id="sexo"
+            [(ngModel)]="cliente.pessoa.sexo"
+            formControlName="sexo"
+          />
+        </div>
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="cpf">Cpf:</label>
+        <input
+          matInput
+          id="cpf"
+          placeholder="Cpf"
+          formControlName="cpf"
+          name="cpf"
+          [(ngModel)]="cliente.pessoa.cpf"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="peso">Peso</label>
+        <input
+          matInput
+          placeholder="Peso"
+          id="peso"
+          formControlName="peso"
+          name="peso"
+          [(ngModel)]="cliente.pessoa.peso"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="altura">Altura:</label>
+        <input
+          matInput
+          placeholder="Altura"
+          formControlName="altura"
+          name="altura"
+          [(ngModel)]="cliente.pessoa.altura"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="informacoes-cliente">
+      <mat-form-field class="form-group">
+        <label for="id">id Cliente:</label>
+        <input
+          matInput
+          placeholder="id medico"
+          formControlName="id"
+          name="id"
+          [(ngModel)]="cliente.id"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="dataCriacao">Data de Criação:</label>
+        <input
+          matInput
+          class="form-control"
+          name="dataCriacao"
+          id="dataCriacao"
+          formControlName="dataCriacao"
+          [(ngModel)]="cliente.dataCriacao"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="dataExclusao">Data de Exclusão:</label>
+        <input
+          matInput
+          class="form-control"
+          name="dataExclusao"
+          id="dataExclusao"
+          formControlName="dataExclusao"
+          [(ngModel)]="cliente.dataExclusao"
+        />
+      </mat-form-field>
+    </div>
+  </form>
+  <button mat-raised-button (click)="deleteCliente()" color="accent">
+    Salvar
+  </button>
+  <button mat-raised-button (click)="cancel()">Cancelar</button>
+</mat-card>
