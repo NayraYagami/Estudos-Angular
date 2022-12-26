@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title>Dados do Médico:</mat-card-title>
-  <form [formGroup]="formGroupMedico">
+  <form>
     <div formGroupName="pessoa" class="medico-pessoa">
       <mat-form-field class="form-group">
         <label for="id">Id da pessoa:</label>
@@ -10,6 +10,7 @@
           formControlName="id"
           id="id"
           name="id"
+          [(ngModel)]="medico.pessoa.id"
         />
       </mat-form-field>
 
@@ -21,6 +22,7 @@
           formControlName="nome"
           id="nome"
           name="nome"
+          [(ngModel)]="medico.pessoa.nome"
         />
       </mat-form-field>
 
@@ -32,13 +34,20 @@
           name="dataNascimento"
           id="dataNascimento"
           formControlName="dataNascimento"
+          [(ngModel)]="medico.pessoa.dataNascimento"
         />
       </mat-form-field>
 
       <mat-form-field class="form-check">
         <label>Sexo:</label>
         <div class="form-check">
-          <input matInput name="sexo" id="sexo" formControlName="sexo" />
+          <input
+            matInput
+            name="sexo"
+            id="sexo"
+            formControlName="sexo"
+            [(ngModel)]="medico.pessoa.sexo"
+          />
         </div>
       </mat-form-field>
 
@@ -50,6 +59,7 @@
           placeholder="Cpf"
           formControlName="cpf"
           name="cpf"
+          [(ngModel)]="medico.pessoa.cpf"
         />
       </mat-form-field>
 
@@ -61,6 +71,7 @@
           id="peso"
           formControlName="peso"
           name="peso"
+          [(ngModel)]="medico.pessoa.peso"
         />
       </mat-form-field>
 
@@ -71,18 +82,31 @@
           placeholder="Altura"
           formControlName="altura"
           name="altura"
+          [(ngModel)]="medico.pessoa.altura"
         />
       </mat-form-field>
     </div>
 
     <mat-form-field class="form-group">
       <label for="id">id medico:</label>
-      <input matInput placeholder="id medico" formControlName="id" name="id" />
+      <input
+        matInput
+        placeholder="id medico"
+        formControlName="id"
+        name="id"
+        [(ngModel)]="medico.id"
+      />
     </mat-form-field>
 
     <mat-form-field class="form-group">
       <label for="crm">Crm:</label>
-      <input matInput placeholder="Crm" formControlName="crm" name="crm" />
+      <input
+        matInput
+        placeholder="Crm"
+        formControlName="crm"
+        name="crm"
+        [(ngModel)]="medico.crm"
+      />
     </mat-form-field>
 
     <mat-form-field class="form-group">
@@ -93,6 +117,7 @@
         name="dataCriacao"
         id="dataCriacao"
         formControlName="dataCriacao"
+        [(ngModel)]="medico.dataCriacao"
       />
     </mat-form-field>
 
@@ -103,12 +128,12 @@
         class="form-control"
         name="dataExclusao"
         id="dataExclusao"
-        formControlName="dataExclusao"
+        [(ngModel)]="medico.dataExclusao"
       />
     </mat-form-field>
   </form>
-  <button mat-raised-button (click)="createMedico()" color="accent">
-    Salvar
+  <button mat-raised-button (click)="deleteMedico()" color="accent">
+    Deletar
   </button>
   <button mat-raised-button (click)="cancel()">Cancelar</button>
 </mat-card>

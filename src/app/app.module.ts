@@ -23,7 +23,7 @@ import { EspecialidadeMedicoCrudComponent } from './views/especialidade-medico-c
 import { EspecialidadeCreateComponent } from './components/especialidade/components/especialidade/especialidade-create/especialidade-create.component';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { EspecialidadeReadComponent } from './components/especialidade/components/especialidade/especialidade-read/especialidade-read.component';
@@ -33,13 +33,21 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 
 import localePt from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import { EspecialidadeUpdateComponent } from './components/especialidade/components/especialidade/especialidade-update/especialidade-update.component';
 import { EspecialidadeDeleteComponent } from './components/especialidade/components/especialidade/especialidade-delete/especialidade-delete.component';
 import { EspecialidadeMedicoCreateComponent } from './components/especialidade-medico/components/especialidade-medico-create/especialidade-medico-create.component';
 import { EspecialidadeMedicoReadComponent } from './components/especialidade-medico/components/especialidade-medico-read/especialidade-medico-read.component';
 import { EspecialidadeMedicoDeleteComponent } from './components/especialidade-medico/components/especialidade-medico-delete/especialidade-medico-delete.component';
 import { MedicoCreate2Component } from './components/medico/medico-create2/medico-create2.component';
+import { MedicoReadComponent } from './components/medico/medico-read/medico-read.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MedicoDeleteComponent } from './components/medico/medico-delete/medico-delete.component';
+import { MedicoUpdateComponent } from './components/medico/medico-update/medico-update.component';
+import { ClienteReadComponent } from './components/cliente/cliente-read/cliente-read.component';
+import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
+import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
+import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -63,6 +71,13 @@ registerLocaleData(localePt);
     EspecialidadeMedicoReadComponent,
     EspecialidadeMedicoDeleteComponent,
     MedicoCreate2Component,
+    MedicoReadComponent,
+    MedicoDeleteComponent,
+    MedicoUpdateComponent,
+    ClienteReadComponent,
+    ClienteCreateComponent,
+    ClienteUpdateComponent,
+    ClienteDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +96,8 @@ registerLocaleData(localePt);
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {

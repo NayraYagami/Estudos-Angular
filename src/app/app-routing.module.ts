@@ -1,3 +1,8 @@
+import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
+import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
+import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
+import { MedicoDeleteComponent } from './components/medico/medico-delete/medico-delete.component';
+import { MedicoUpdateComponent } from './components/medico/medico-update/medico-update.component';
 import { MedicoCreate2Component } from './components/medico/medico-create2/medico-create2.component';
 import { EspecialidadeMedicoDeleteComponent } from './components/especialidade-medico/components/especialidade-medico-delete/especialidade-medico-delete.component';
 import { EspecialidadeDeleteComponent } from './components/especialidade/components/especialidade/especialidade-delete/especialidade-delete.component';
@@ -27,12 +32,32 @@ const routes: Routes = [
     component: ClienteCrudComponent,
   },
   {
+    path: 'cliente/create',
+    component: ClienteCreateComponent,
+  },
+  {
+    path: 'cliente/update/:id',
+    component: ClienteUpdateComponent,
+  },
+  {
+    path: 'cliente/delete/:id',
+    component: ClienteDeleteComponent,
+  },
+  {
     path: 'medico',
     component: MedicoCrudComponent,
   },
   {
     path: 'medico/create',
     component: MedicoCreate2Component,
+  },
+  {
+    path: 'medico/update/:id',
+    component: MedicoUpdateComponent,
+  },
+  {
+    path: 'medico/delete/:id',
+    component: MedicoDeleteComponent,
   },
   {
     path: 'especialidade',
