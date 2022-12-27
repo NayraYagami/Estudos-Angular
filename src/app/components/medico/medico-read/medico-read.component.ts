@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MedicoService } from './../medico.service';
 import { MedicoSearch } from './../medico.model';
 import { Component, OnInit } from '@angular/core';
@@ -8,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./medico-read.component.css'],
 })
 export class MedicoReadComponent implements OnInit {
-  constructor(private medicoService: MedicoService) {}
+  constructor(
+    private medicoService: MedicoService,
+    private formBuilder: FormBuilder
+  ) {}
 
   displayedColumns = [
     'id',
@@ -24,24 +28,36 @@ export class MedicoReadComponent implements OnInit {
     idMedico: null,
     nomeMedico: '',
     cpf: '',
-    dataCriacaoInicio: null,
-    dataCriacaoFim: null,
-    idsEspecialidadeMedico: null,
+    dataCriacaoInicio: '',
+    dataCriacaoFim: '',
+    ativo: null,
   };
 
   medicosSearch: MedicoSearch[];
 
-  ngOnInit(): void {
-    this.medicoService.read(this.medicoSearch).subscribe((medicosSearch) => {
-      this.medicosSearch = medicosSearch;
-      console.log(medicosSearch);
+  public formGroupMedico: FormGroup;
+
+  search() {
+    this.medicoService
+      .read(this.formGroupMedico.value)
+      .subscribe((medicosSearch) => {
+        this.medicosSearch = medicosSearch;
+        console.log(medicosSearch);
+      });
+  }
+
+  createForm(medico: MedicoSearch) {
+    this.formGroupMedico = this.formBuilder.group({
+      idMedico: [''],
+      nomeMedico: [''],
+      cpf: [''],
+      dataCriacaoInicio: [''],
+      dataCriacaoFim: [''],
+      ativo: [''],
     });
   }
 
-  buscar(): void {
-    this.medicoService.read(this.medicoSearch).subscribe((medicosSearch) => {
-      this.medicosSearch = medicosSearch;
-      console.log(medicosSearch);
-    });
+  ngOnInit(): void {
+    this.createForm(this.medicoSearch);
   }
 }

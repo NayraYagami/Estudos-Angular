@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./medico-update.component.css'],
 })
 export class MedicoUpdateComponent implements OnInit {
+  childmessage = false;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,

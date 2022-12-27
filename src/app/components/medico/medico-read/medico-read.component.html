@@ -1,3 +1,71 @@
+<mat-card>
+  <mat-card-title>Filtros:</mat-card-title>
+  <form [formGroup]="formGroupMedico">
+    <div class="informacoes-medico">
+      <mat-form-field class="form-group">
+        <label for="idMedico">id Médico:</label>
+        <input matInput formControlName="idMedico" name="idMedico" />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="nomeMedico">Nome Médico:</label>
+        <input
+          matInput
+          class="form-control"
+          name="nomeMedico"
+          id="nomeMedico"
+          formControlName="nomeMedico"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="dataCriacaoInicio">Data de Criação Ínicio:</label>
+        <input
+          matInput
+          class="form-control"
+          name="dataCriacaoInicio"
+          id="dataCriacaoInicio"
+          formControlName="dataCriacaoInicio"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="dataCriacaoFim">Data de Criação Fim:</label>
+        <input
+          matInput
+          class="form-control"
+          name="dataCriacaoFim"
+          id="dataCriacaoFim"
+          formControlName="dataCriacaoFim"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="ativo">Ativo:</label>
+        <input
+          matInput
+          class="form-control"
+          name="ativo"
+          id="ativo"
+          formControlName="ativo"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="cpf">Cpf:</label>
+        <input
+          matInput
+          class="form-control"
+          name="cpf"
+          id="cpf"
+          formControlName="cpf"
+        />
+      </mat-form-field>
+    </div>
+  </form>
+  <button mat-raised-button (click)="search()" color="accent">Filtrar</button>
+</mat-card>
+
 <div class="mat-elevation-z4">
   <table mat-table [dataSource]="medicosSearch">
     <!-- Id Column -->

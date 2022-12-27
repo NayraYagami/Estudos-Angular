@@ -1,4 +1,4 @@
-import { Cliente } from './../../cliente/cliente.model';
+import { Medico } from './../medico.model';
 import { Router } from '@angular/router';
 import { MedicoService } from './../medico.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +18,7 @@ export class MedicoCreate2Component implements OnInit {
 
   public formGroupMedico: FormGroup;
 
-  createForm(cliente: Cliente) {
+  createForm(medico: Medico) {
     this.formGroupMedico = this.formBuilder.group({
       pessoa: this.formBuilder.group({
         id: [''],
@@ -37,7 +37,7 @@ export class MedicoCreate2Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createForm(new Cliente());
+    this.createForm(new Medico());
   }
 
   createMedico(): void {

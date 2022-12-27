@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-title>Dados do Médico:</mat-card-title>
+  <mat-card-title>Dados do Cliente:</mat-card-title>
   <form [formGroup]="formGroupCliente">
     <div formGroupName="pessoa" class="cliente-pessoa">
       <mat-form-field class="form-group">
@@ -10,7 +10,7 @@
           formControlName="id"
           id="id"
           name="id"
-          [(ngModel)]="cliente.pessoa.id"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -22,7 +22,7 @@
           formControlName="nome"
           id="nome"
           name="nome"
-          [(ngModel)]="cliente.pessoa.nome"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -34,7 +34,7 @@
           name="dataNascimento"
           id="dataNascimento"
           formControlName="dataNascimento"
-          [(ngModel)]="cliente.pessoa.dataNascimento"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -45,8 +45,8 @@
             matInput
             name="sexo"
             id="sexo"
-            [(ngModel)]="cliente.pessoa.sexo"
             formControlName="sexo"
+            [readonly]="!childmessage"
           />
         </div>
       </mat-form-field>
@@ -59,7 +59,7 @@
           placeholder="Cpf"
           formControlName="cpf"
           name="cpf"
-          [(ngModel)]="cliente.pessoa.cpf"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -71,7 +71,7 @@
           id="peso"
           formControlName="peso"
           name="peso"
-          [(ngModel)]="cliente.pessoa.peso"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -82,7 +82,7 @@
           placeholder="Altura"
           formControlName="altura"
           name="altura"
-          [(ngModel)]="cliente.pessoa.altura"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
     </div>
@@ -95,7 +95,7 @@
           placeholder="id medico"
           formControlName="id"
           name="id"
-          [(ngModel)]="cliente.id"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -107,7 +107,7 @@
           name="dataCriacao"
           id="dataCriacao"
           formControlName="dataCriacao"
-          [(ngModel)]="cliente.dataCriacao"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -119,13 +119,80 @@
           name="dataExclusao"
           id="dataExclusao"
           formControlName="dataExclusao"
-          [(ngModel)]="cliente.dataExclusao"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
+
+      <div class="telefone">
+        <div formArrayName="telefones">
+          <ng-container
+            *ngFor="let item of telefones.controls; let Lista = index"
+          >
+            <div [formGroupName]="Lista">
+              <input
+                formControlName="numeroTelefone"
+                [readonly]="!childmessage"
+              />
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="telefones.controls.length === 0"> </ng-container>
+        </div>
+      </div>
+
+      <mat-form-field>
+        <input
+          #input
+          matInput
+          type="text"
+          placeholder="Telefone"
+          [readonly]="!childmessage"
+        />
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        (click)="adicionarTelefone(input.value)"
+        disabled=""
+      >
+        Adicionar
+      </button>
+
+      <div class="email">
+        <div formArrayName="emails">
+          <ng-container
+            *ngFor="let item of emails.controls; let indiceEmail = index"
+          >
+            <div [formGroupName]="indiceEmail">
+              <input formControlName="enderecoEmail" />
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="emails.controls.length === 0"> </ng-container>
+        </div>
+      </div>
+
+      <mat-form-field>
+        <input
+          #inputEmail
+          matInput
+          type="text"
+          placeholder="Email"
+          disabled=""
+        />
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        (click)="adicionarEmail(inputEmail.value)"
+        disabled=""
+      >
+        Adicionar
+      </button>
     </div>
   </form>
   <button mat-raised-button (click)="deleteCliente()" color="accent">
-    Salvar
+    Deletar
   </button>
   <button mat-raised-button (click)="cancel()">Cancelar</button>
 </mat-card>

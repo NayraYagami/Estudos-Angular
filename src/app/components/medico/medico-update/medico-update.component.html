@@ -10,6 +10,7 @@
           formControlName="id"
           id="id"
           name="id"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -77,7 +78,13 @@
 
     <mat-form-field class="form-group">
       <label for="id">id medico:</label>
-      <input matInput placeholder="id medico" formControlName="id" name="id" />
+      <input
+        matInput
+        placeholder="id medico"
+        formControlName="id"
+        name="id"
+        [readonly]="!childmessage"
+      />
     </mat-form-field>
 
     <mat-form-field class="form-group">

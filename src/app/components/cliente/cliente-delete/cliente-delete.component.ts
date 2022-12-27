@@ -1,4 +1,4 @@
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClienteService } from './../cliente.service';
 import { Cliente } from './../cliente.model';
@@ -11,6 +11,8 @@ import { Component } from '@angular/core';
 })
 export class ClienteDeleteComponent {
   cliente: Cliente;
+
+  childmessage = false;
 
   constructor(
     private clienteService: ClienteService,
@@ -40,10 +42,40 @@ export class ClienteDeleteComponent {
     });
   }
 
+  get telefones() {
+    return this.formGroupCliente.get('telefones') as FormArray;
+  }
+  get emails() {
+    return this.formGroupCliente.get('emails') as FormArray;
+  }
+
+  adicionarTelefone(numeroTelefone: string) {
+    this.telefones.push(
+      this.formBuilder.group({
+        numeroTelefone: numeroTelefone,
+      })
+    );
+  }
+  adicionarEmail(enderecoEmail: string) {
+    this.emails.push(
+      this.formBuilder.group({
+        enderecoEmail: enderecoEmail,
+      })
+    );
+  }
+
   ngOnInit(): void {
+    this.createForm(new Cliente());
     const id = this.route.snapshot.paramMap.get('id');
     this.clienteService.readById(id).subscribe((cliente) => {
       this.cliente = cliente;
+      this.formGroupCliente.patchValue(cliente);
+      this.cliente.telefones.map((telefone) =>
+        this.adicionarTelefone(telefone.numeroTelefone)
+      );
+      this.cliente.emails.map((email) =>
+        this.adicionarEmail(email.enderecoEmail)
+      );
     });
   }
 

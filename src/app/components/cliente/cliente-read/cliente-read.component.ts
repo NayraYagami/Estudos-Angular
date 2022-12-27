@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClienteSearch } from './../cliente.model';
 import { ClienteService } from './../cliente.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cliente-read.component.css'],
 })
 export class ClienteReadComponent implements OnInit {
-  constructor(private clienteService: ClienteService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private clienteService: ClienteService
+  ) {}
 
   displayedColumns = [
     'id',
@@ -34,10 +39,33 @@ export class ClienteReadComponent implements OnInit {
 
   clientesSearch: ClienteSearch[];
 
-  ngOnInit(): void {
-    this.clienteService.read(this.clienteSearch).subscribe((clientesSearch) => {
-      this.clientesSearch = clientesSearch;
-      console.log(clientesSearch);
+  search() {
+    this.clienteService
+      .read(this.formGroupCliente.value)
+      .subscribe((clientesSearch) => {
+        this.clientesSearch = clientesSearch;
+        console.log(clientesSearch);
+      });
+  }
+
+  public formGroupCliente: FormGroup;
+
+  cliente: ClienteSearch;
+
+  createForm(cliente: ClienteSearch) {
+    this.formGroupCliente = this.formBuilder.group({
+      idCliente: [''],
+      nomeCliente: [''],
+      numeroTelefone: [''],
+      dataCriacaoInicio: [''],
+      dataCriacaoFim: [''],
+      ativo: [''],
+      cpf: [''],
+      emailCliente: [''],
     });
+  }
+
+  ngOnInit(): void {
+    this.createForm(this.clienteSearch);
   }
 }

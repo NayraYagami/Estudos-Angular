@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title>Dados do Médico:</mat-card-title>
-  <form>
+  <form [formGroup]="formGroupMedico">
     <div formGroupName="pessoa" class="medico-pessoa">
       <mat-form-field class="form-group">
         <label for="id">Id da pessoa:</label>
@@ -10,7 +10,7 @@
           formControlName="id"
           id="id"
           name="id"
-          [(ngModel)]="medico.pessoa.id"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -22,7 +22,7 @@
           formControlName="nome"
           id="nome"
           name="nome"
-          [(ngModel)]="medico.pessoa.nome"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -34,7 +34,7 @@
           name="dataNascimento"
           id="dataNascimento"
           formControlName="dataNascimento"
-          [(ngModel)]="medico.pessoa.dataNascimento"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -46,7 +46,7 @@
             name="sexo"
             id="sexo"
             formControlName="sexo"
-            [(ngModel)]="medico.pessoa.sexo"
+            [readonly]="!childmessage"
           />
         </div>
       </mat-form-field>
@@ -59,7 +59,7 @@
           placeholder="Cpf"
           formControlName="cpf"
           name="cpf"
-          [(ngModel)]="medico.pessoa.cpf"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -71,7 +71,7 @@
           id="peso"
           formControlName="peso"
           name="peso"
-          [(ngModel)]="medico.pessoa.peso"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -82,7 +82,7 @@
           placeholder="Altura"
           formControlName="altura"
           name="altura"
-          [(ngModel)]="medico.pessoa.altura"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
     </div>
@@ -94,7 +94,7 @@
         placeholder="id medico"
         formControlName="id"
         name="id"
-        [(ngModel)]="medico.id"
+        [readonly]="!childmessage"
       />
     </mat-form-field>
 
@@ -105,7 +105,7 @@
         placeholder="Crm"
         formControlName="crm"
         name="crm"
-        [(ngModel)]="medico.crm"
+        [readonly]="!childmessage"
       />
     </mat-form-field>
 
@@ -117,7 +117,7 @@
         name="dataCriacao"
         id="dataCriacao"
         formControlName="dataCriacao"
-        [(ngModel)]="medico.dataCriacao"
+        [readonly]="!childmessage"
       />
     </mat-form-field>
 
@@ -128,12 +128,13 @@
         class="form-control"
         name="dataExclusao"
         id="dataExclusao"
-        [(ngModel)]="medico.dataExclusao"
+        formControlName="dataExclusao"
+        [readonly]="!childmessage"
       />
     </mat-form-field>
   </form>
   <button mat-raised-button (click)="deleteMedico()" color="accent">
-    Deletar
+    Salvar
   </button>
   <button mat-raised-button (click)="cancel()">Cancelar</button>
 </mat-card>

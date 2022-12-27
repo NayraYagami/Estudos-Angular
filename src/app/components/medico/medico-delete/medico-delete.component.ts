@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./medico-delete.component.css'],
 })
 export class MedicoDeleteComponent implements OnInit {
+  childmessage = false;
   medico: Medico;
 
   constructor(
@@ -20,9 +21,11 @@ export class MedicoDeleteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.createForm(new Medico());
     const id = this.route.snapshot.paramMap.get('id');
     this.medicoService.readById(id).subscribe((medico) => {
       this.medico = medico;
+      this.formGroupMedico.patchValue(medico);
     });
   }
 

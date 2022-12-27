@@ -13,5 +13,5 @@ export interface MedicoSearch {
   cpf: string;
   dataCriacaoInicio: string;
   dataCriacaoFim: string;
-  idsEspecialidadeMedico: number[];
+  ativo: boolean;
 }

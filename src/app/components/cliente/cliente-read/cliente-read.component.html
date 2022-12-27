@@ -1,3 +1,93 @@
+<mat-card>
+  <mat-card-title>Filtros:</mat-card-title>
+  <form [formGroup]="formGroupCliente">
+    <div class="informacoes-cliente">
+      <mat-form-field class="form-group">
+        <label for="idCliente">id Cliente:</label>
+        <input matInput formControlName="idCliente" name="idCliente" />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="nomeCliente">Nome Cliente:</label>
+        <input
+          matInput
+          class="form-control"
+          name="nomeCliente"
+          id="nomeCliente"
+          formControlName="nomeCliente"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="numeroTelefone">Número telefone:</label>
+        <input
+          matInput
+          class="form-control"
+          name="numeroTelefone"
+          id="numeroTelefone"
+          formControlName="numeroTelefone"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="dataCriacaoInicio">Data de Criação Ínicio:</label>
+        <input
+          matInput
+          class="form-control"
+          name="dataCriacaoInicio"
+          id="dataCriacaoInicio"
+          formControlName="dataCriacaoInicio"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="dataCriacaoFim">Data de Criação Fim:</label>
+        <input
+          matInput
+          class="form-control"
+          name="dataCriacaoFim"
+          id="dataCriacaoFim"
+          formControlName="dataCriacaoFim"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="ativo">Ativo:</label>
+        <input
+          matInput
+          class="form-control"
+          name="ativo"
+          id="ativo"
+          formControlName="ativo"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="cpf">Cpf:</label>
+        <input
+          matInput
+          class="form-control"
+          name="cpf"
+          id="cpf"
+          formControlName="cpf"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <label for="emailCliente">Email Cliente:</label>
+        <input
+          matInput
+          class="form-control"
+          name="emailCliente"
+          id="emailCliente"
+          formControlName="emailCliente"
+        />
+      </mat-form-field>
+    </div>
+  </form>
+  <button mat-raised-button (click)="search()" color="accent">Filtrar</button>
+</mat-card>
+
 <div class="mat-elevation-z4">
   <table mat-table [dataSource]="clientesSearch">
     <!-- Id Column -->
