@@ -20,6 +20,15 @@ export class ClienteUpdateComponent implements OnInit {
 
   formGroupCliente!: FormGroup;
   cliente: Cliente;
+  sexoOption: any[];
+
+  getSexo() {
+    return [
+      { value: 'MASCULINO', desc: 'Masculino' },
+      { value: 'FEMININO', desc: 'Feminino' },
+      { value: 'T_REX', desc: 'T_Rex' },
+    ];
+  }
 
   createForm(cliente: Cliente) {
     this.formGroupCliente = this.formBuilder.group({
@@ -73,6 +82,7 @@ export class ClienteUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sexoOption = this.getSexo();
     this.createForm(new Cliente());
     const id = this.route.snapshot.paramMap.get('id');
     this.clienteService.readById(id).subscribe((cliente) => {

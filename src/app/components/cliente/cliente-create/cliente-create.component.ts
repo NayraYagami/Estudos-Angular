@@ -16,6 +16,8 @@ export class ClienteCreateComponent implements OnInit {
     private router: Router
   ) {}
 
+  sexoOption: any[];
+
   public formGroupCliente: FormGroup;
 
   cliente: Cliente;
@@ -42,11 +44,13 @@ export class ClienteCreateComponent implements OnInit {
   get telefones() {
     return this.formGroupCliente.get('telefones') as FormArray;
   }
+
   get emails() {
     return this.formGroupCliente.get('emails') as FormArray;
   }
 
   ngOnInit(): void {
+    this.sexoOption = this.getSexo();
     this.createForm(new Cliente());
   }
 
@@ -71,6 +75,14 @@ export class ClienteCreateComponent implements OnInit {
         enderecoEmail: enderecoEmail,
       })
     );
+  }
+
+  getSexo() {
+    return [
+      { value: 'MASCULINO', desc: 'Masculino' },
+      { value: 'FEMININO', desc: 'Feminino' },
+      { value: 'T_REX', desc: 'T_Rex' },
+    ];
   }
 
   cancel(): void {

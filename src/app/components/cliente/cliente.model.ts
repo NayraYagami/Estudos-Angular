@@ -10,6 +10,7 @@ export interface ClienteSearch {
   ativo: boolean;
   cpf: string;
   emailCliente: string;
+  sexo: string;
 }
 
 export class Cliente {

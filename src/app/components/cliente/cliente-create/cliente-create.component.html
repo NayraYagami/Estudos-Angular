@@ -35,13 +35,6 @@
         />
       </mat-form-field>
 
-      <mat-form-field class="form-check">
-        <label>Sexo:</label>
-        <div class="form-check">
-          <input matInput name="sexo" id="sexo" formControlName="sexo" />
-        </div>
-      </mat-form-field>
-
       <mat-form-field class="form-group">
         <label for="cpf">Cpf:</label>
         <input
@@ -108,16 +101,29 @@
         />
       </mat-form-field>
 
+      <div id="sexo" class="row">
+        <label class="radio-inline">Sexo:</label>
+        <div *ngFor="let item of sexoOption">
+          <label class="radio-inline"></label>
+          <input
+            type="radio"
+            [value]="item.value"
+            class="form-control"
+            name="sexo"
+            id="sexo"
+            formControlName="sexo"
+          />
+          {{ item.desc }}
+        </div>
+      </div>
+
       <div class="telefones">
         <div formArrayName="telefones">
           <ng-container
             *ngFor="let item of telefones.controls; let indiceTelefone = index"
           >
-            <div
-              [formGroupName]="indiceTelefone"
-              [(ngModel)]="cliente.telefones"
-            >
-              <input formControlName="telefones" />
+            <div [formGroupName]="indiceTelefone">
+              <input formControlName="numeroTelefone" />
             </div>
           </ng-container>
 
@@ -139,7 +145,7 @@
             *ngFor="let item of emails.controls; let indiceEmail = index"
           >
             <div [formGroupName]="indiceEmail">
-              <input formControlName="emails" />
+              <input formControlName="enderecoEmail" />
             </div>
           </ng-container>
 
@@ -156,8 +162,8 @@
       </button>
     </div>
   </form>
-  <button mat-raised-button (click)="createCliente()" color="accent">
+  <button mat-raised-button (click)="createCliente()" id="button-accent">
     Salvar
   </button>
-  <button mat-raised-button (click)="cancel()">Cancelar</button>
+  <button mat-raised-button (click)="cancel()" id="button-sec">Cancelar</button>
 </mat-card>

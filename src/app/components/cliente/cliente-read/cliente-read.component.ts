@@ -12,8 +12,21 @@ import { Component, OnInit } from '@angular/core';
 export class ClienteReadComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private router: Router
   ) {}
+
+  ativoOption: any[];
+
+  sexoOption: any[];
+
+  getSexo() {
+    return [
+      { value: 'MASCULINO', desc: 'Masculino' },
+      { value: 'FEMININO', desc: 'Feminino' },
+      { value: 'T_REX', desc: 'T_Rex' },
+    ];
+  }
 
   displayedColumns = [
     'id',
@@ -35,6 +48,7 @@ export class ClienteReadComponent implements OnInit {
     ativo: null,
     cpf: '',
     emailCliente: '',
+    sexo: null,
   };
 
   clientesSearch: ClienteSearch[];
@@ -62,10 +76,24 @@ export class ClienteReadComponent implements OnInit {
       ativo: [''],
       cpf: [''],
       emailCliente: [''],
+      sexo: [null],
     });
   }
 
+  getAtivo() {
+    return [
+      { value: true, desc: 'Ativo' },
+      { value: false, desc: 'Cancelado' },
+    ];
+  }
+
+  navigateToClienteCreate() {
+    this.router.navigate(['/cliente/create']);
+  }
+
   ngOnInit(): void {
+    this.sexoOption = this.getSexo();
+    this.ativoOption = this.getAtivo();
     this.createForm(this.clienteSearch);
   }
 }
