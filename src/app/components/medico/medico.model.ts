@@ -14,4 +14,5 @@ export interface MedicoSearch {
   dataCriacaoInicio: string;
   dataCriacaoFim: string;
   ativo: boolean;
+  sexo: string;
 }

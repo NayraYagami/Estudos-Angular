@@ -3,6 +3,52 @@
   width: 12.5rem;
 }
 
+.item label {
+  display: block;
+  cursor: pointer;
+  padding: 1rem;
+  font-size: 20px;
+  border-bottom: solid 2px #f785d4;
+}
+
+.item label:hover {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.item ul li a {
+  width: 100%;
+  display: block;
+  text-decoration: none;
+}
+
+.item input {
+  display: none;
+}
+
+.item ul {
+  width: 1rem;
+  list-style: none;
+  padding: 0;
+  overflow: hidden;
+  max-height: 0;
+  transition: all 0.1s linear;
+}
+
+.item ul li a:hover {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.item input:checked ~ ul {
+  height: auto;
+  max-height: 100%;
+  transform: all;
+  width: 100%;
+}
+
 .sidenav a {
   color: #ffbeeb;
 }
@@ -14,7 +60,6 @@
 .content {
   padding: 1rem;
   background-color: white;
-  color: black;
 }
 .material-icons {
   color: #f785d4;

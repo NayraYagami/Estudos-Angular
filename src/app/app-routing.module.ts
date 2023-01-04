@@ -1,3 +1,5 @@
+import { AgendamentosDeleteComponent } from './components/agendamentos/agendamentos-delete/agendamentos-delete.component';
+import { AgendamentosUpdateComponent } from './components/agendamentos/agendamentos-update/agendamentos-update.component';
 import { AgendamentosCreateComponent } from './components/agendamentos/agendamentos-create/agendamentos-create.component';
 import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
@@ -31,6 +33,14 @@ const routes: Routes = [
   {
     path: 'agendamentos/create',
     component: AgendamentosCreateComponent,
+  },
+  {
+    path: 'agendamentos/update/:id',
+    component: AgendamentosUpdateComponent,
+  },
+  {
+    path: 'agendamentos/delete/:id',
+    component: AgendamentosDeleteComponent,
   },
   {
     path: 'cliente',

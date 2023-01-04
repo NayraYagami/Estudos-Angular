@@ -51,6 +51,7 @@ import { ClienteDeleteComponent } from './components/cliente/cliente-delete/clie
 import { AgendamentosCreateComponent } from './components/agendamentos/agendamentos-create/agendamentos-create.component';
 import { AgendamentosReadComponent } from './components/agendamentos/agendamentos-read/agendamentos-read.component';
 import { AgendamentosUpdateComponent } from './components/agendamentos/agendamentos-update/agendamentos-update.component';
+import { AgendamentosDeleteComponent } from './components/agendamentos/agendamentos-delete/agendamentos-delete.component';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -84,6 +85,7 @@ registerLocaleData(localePt);
     AgendamentosCreateComponent,
     AgendamentosReadComponent,
     AgendamentosUpdateComponent,
+    AgendamentosDeleteComponent,
   ],
   imports: [
     BrowserModule,

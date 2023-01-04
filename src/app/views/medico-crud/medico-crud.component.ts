@@ -15,8 +15,4 @@ export class MedicoCrudComponent implements OnInit {
     };
   }
   ngOnInit(): void {}
-
-  navigateToMedicoCreate(): void {
-    this.router.navigate(['/medico/create']);
-  }
 }

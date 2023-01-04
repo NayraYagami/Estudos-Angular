@@ -48,4 +48,20 @@ export class AgendamentosService {
       agendamentosSearch
     );
   }
+
+  delete(id: number): Observable<Agendamentos> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.delete<Agendamentos>(url).pipe(
+      map((obj) => obj),
+      catchError((e) => this.handleError(e))
+    );
+  }
+
+  readById(id: string): Observable<Agendamentos> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get<Agendamentos>(url).pipe(
+      map((obj) => obj),
+      catchError((e) => this.handleError(e))
+    );
+  }
 }

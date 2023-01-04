@@ -6,9 +6,9 @@
         <label for="id">id agendamento:</label>
         <input
           matInput
-          placeholder="id agendamento"
           formControlName="id"
           name="id"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -18,7 +18,6 @@
           matInput
           class="form-control"
           name="dataAbertura"
-          placeholder="Data de Abertura"
           id="dataAbertura"
           formControlName="dataAbertura"
         />
@@ -30,7 +29,6 @@
           matInput
           class="form-control"
           name="dataConsulta"
-          placeholder="Data da Consulta"
           id="dataConsulta"
           formControlName="dataConsulta"
         />
@@ -42,7 +40,6 @@
           matInput
           class="form-control"
           name="dataCancelamento"
-          placeholder="Data de Cancelamento"
           id="dataCancelamento"
           formControlName="dataCancelamento"
         />
@@ -54,7 +51,6 @@
           matInput
           class="form-control"
           name="valorConsulta"
-          placeholder="Valor da consulta"
           id="valorConsulta"
           formControlName="valorConsulta"
         />
@@ -64,29 +60,19 @@
     <div formGroupName="cliente" class="cliente">
       <mat-form-field class="form-group">
         <label for="id">Id do cliente:</label>
-        <input
-          matInput
-          placeholder="Id cliente"
-          formControlName="id"
-          id="id"
-          name="id"
-        />
+        <input matInput formControlName="id" id="id" name="id" />
       </mat-form-field>
     </div>
 
     <div formGroupName="medico" class="medico">
       <mat-form-field class="form-group">
         <label for="id">Id do médico:</label>
-        <input
-          matInput
-          placeholder="Id médico"
-          formControlName="id"
-          id="id"
-          name="id"
-        />
+        <input matInput formControlName="id" id="id" name="id" />
       </mat-form-field>
     </div>
   </form>
-  <button mat-raised-button (click)="createAgendamento()" color="accent">Salvar</button>
-  <button mat-raised-button (click)="cancel()">Cancelar</button>
+  <button mat-raised-button (click)="createAgendamento()" id="button-accent">
+    Salvar
+  </button>
+  <button mat-raised-button (click)="cancel()" id="button-sec">Cancelar</button>
 </mat-card>

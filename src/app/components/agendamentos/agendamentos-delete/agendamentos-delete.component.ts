@@ -1,19 +1,19 @@
 import { Agendamentos } from './../agendamentos.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AgendamentosService } from './../agendamentos.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-agendamentos-update',
-  templateUrl: './agendamentos-update.component.html',
-  styleUrls: ['./agendamentos-update.component.css'],
+  selector: 'app-agendamentos-delete',
+  templateUrl: './agendamentos-delete.component.html',
+  styleUrls: ['./agendamentos-delete.component.css'],
 })
-export class AgendamentosUpdateComponent implements OnInit {
+export class AgendamentosDeleteComponent {
   constructor(
-    private formBuilder: FormBuilder,
     private agendamentosService: AgendamentosService,
     private router: Router,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute
   ) {}
 
@@ -37,15 +37,13 @@ export class AgendamentosUpdateComponent implements OnInit {
     });
   }
 
-  updateAgendamento() {
-    this.agendamentosService
-      .update(this.formGroupAgendamentos.value)
-      .subscribe(() => {
-        this.agendamentosService.showMenssage(
-          'Agendamento atualizado com sucesso!'
-        );
-        this.router.navigate(['/agendamento']);
-      });
+  deleteAgendamento() {
+    this.agendamentosService.delete(this.agendamentos.id).subscribe(() => {
+      this.agendamentosService.showMenssage(
+        'Agendamento cancelado com sucesso!'
+      );
+      this.router.navigate(['/agendamento']);
+    });
   }
 
   cancel() {

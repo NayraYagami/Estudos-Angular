@@ -15,9 +15,5 @@ export class ClienteCrudComponent implements OnInit {
     };
   }
 
-  navigateToClienteCreate() {
-    this.router.navigate(['/cliente/create']);
-  }
-
   ngOnInit(): void {}
 }

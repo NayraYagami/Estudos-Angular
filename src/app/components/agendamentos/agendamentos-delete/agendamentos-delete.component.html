@@ -20,6 +20,7 @@
           name="dataAbertura"
           id="dataAbertura"
           formControlName="dataAbertura"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -31,6 +32,7 @@
           name="dataConsulta"
           id="dataConsulta"
           formControlName="dataConsulta"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -42,6 +44,7 @@
           name="dataCancelamento"
           id="dataCancelamento"
           formControlName="dataCancelamento"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -53,6 +56,7 @@
           name="valorConsulta"
           id="valorConsulta"
           formControlName="valorConsulta"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
     </div>
@@ -60,23 +64,30 @@
     <div formGroupName="cliente" class="cliente">
       <mat-form-field class="form-group">
         <label for="id">Id do cliente:</label>
-        <input matInput formControlName="id" id="id" name="id" />
+        <input
+          matInput
+          formControlName="id"
+          id="id"
+          name="id"
+          [readonly]="!childmessage"
+        />
       </mat-form-field>
     </div>
 
     <div formGroupName="medico" class="medico">
       <mat-form-field class="form-group">
         <label for="id">Id do médico:</label>
-        <input matInput formControlName="id" id="id" name="id" />
+        <input
+          matInput
+          formControlName="id"
+          id="id"
+          name="id"
+          [readonly]="!childmessage"
+        />
       </mat-form-field>
     </div>
   </form>
-  <button
-    mat-raised-button
-    (click)="updateAgendamento()"
-    color="accent"
-    id="button-accent"
-  >
+  <button mat-raised-button (click)="deleteAgendamento()" id="button-accent">
     Salvar
   </button>
   <button mat-raised-button (click)="cancel()" id="button-sec">Cancelar</button>

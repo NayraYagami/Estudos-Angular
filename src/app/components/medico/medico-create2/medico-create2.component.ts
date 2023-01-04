@@ -16,6 +16,8 @@ export class MedicoCreate2Component implements OnInit {
     private router: Router
   ) {}
 
+  sexoOption: any[];
+
   public formGroupMedico: FormGroup;
 
   createForm(medico: Medico) {
@@ -37,6 +39,7 @@ export class MedicoCreate2Component implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sexoOption = this.getSexo();
     this.createForm(new Medico());
   }
 
@@ -46,6 +49,14 @@ export class MedicoCreate2Component implements OnInit {
       this.medicoService.showMenssage('Operação executada com sucesso!');
       this.router.navigate(['/medico']);
     });
+  }
+
+  getSexo() {
+    return [
+      { value: 'MASCULINO', desc: 'Masculino' },
+      { value: 'FEMININO', desc: 'Feminino' },
+      { value: 'T_REX', desc: 'T_Rex' },
+    ];
   }
 
   cancel(): void {

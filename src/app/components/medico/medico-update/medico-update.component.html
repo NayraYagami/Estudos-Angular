@@ -36,12 +36,21 @@
         />
       </mat-form-field>
 
-      <mat-form-field class="form-check">
-        <label>Sexo:</label>
-        <div class="form-check">
-          <input matInput name="sexo" id="sexo" formControlName="sexo" />
+      <div id="sexo" class="row">
+        <label class="radio-inline">Sexo:</label>
+        <div *ngFor="let item of sexoOption">
+          <label class="radio-inline"></label>
+          <input
+            type="radio"
+            [value]="item.value"
+            class="form-control"
+            name="sexo"
+            id="sexo"
+            formControlName="sexo"
+          />
+          {{ item.desc }}
         </div>
-      </mat-form-field>
+      </div>
 
       <mat-form-field class="form-group">
         <label for="cpf">Cpf:</label>
@@ -114,8 +123,8 @@
       />
     </mat-form-field>
   </form>
-  <button mat-raised-button (click)="updateMedico()" color="accent">
+  <button mat-raised-button (click)="updateMedico()" id="button-accent">
     Salvar
   </button>
-  <button mat-raised-button (click)="cancel()">Cancelar</button>
+  <button mat-raised-button (click)="cancel()" id="button-sec">Cancelar</button>
 </mat-card>

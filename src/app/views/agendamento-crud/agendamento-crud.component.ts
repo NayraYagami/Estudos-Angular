@@ -14,7 +14,4 @@ export class AgendamentoCrudComponent {
       routeUrl: '/agendamentos',
     };
   }
-  navigateToAgendamentoCreate() {
-    this.router.navigate(['/agendamentos/create']);
-  }
 }

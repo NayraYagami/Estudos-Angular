@@ -21,6 +21,16 @@ export class MedicoUpdateComponent implements OnInit {
   formGroupMedico!: FormGroup;
   medico: Medico;
 
+  sexoOption: any[];
+
+  getSexo() {
+    return [
+      { value: 'MASCULINO', desc: 'Masculino' },
+      { value: 'FEMININO', desc: 'Feminino' },
+      { value: 'T_REX', desc: 'T_Rex' },
+    ];
+  }
+
   createForm(medico: Medico) {
     this.formGroupMedico = this.formBuilder.group({
       pessoa: this.formBuilder.group({
@@ -48,6 +58,7 @@ export class MedicoUpdateComponent implements OnInit {
   cancel() {}
 
   ngOnInit(): void {
+    this.sexoOption = this.getSexo();
     this.createForm(new Medico());
     const id = this.route.snapshot.paramMap.get('id');
     this.medicoService.readById(id).subscribe((medico) => {

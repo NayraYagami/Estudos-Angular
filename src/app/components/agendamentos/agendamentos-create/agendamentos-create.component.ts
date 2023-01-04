@@ -1,5 +1,5 @@
 import { AgendamentosService } from './../agendamentos.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Agendamentos } from './../agendamentos.model';
 import { Component, OnInit } from '@angular/core';
@@ -13,8 +13,11 @@ export class AgendamentosCreateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private agendamentosService: AgendamentosService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
+
+  childmessage = false;
 
   cancel(): void {
     this.router.navigate(['/agendamento']);
@@ -28,7 +31,7 @@ export class AgendamentosCreateComponent implements OnInit {
     this.formGroupAgendamentos = this.formBuilder.group({
       id: [''],
       dataAbertura: ['2000-06-12T11:52:28.397', [Validators.required]],
-      dataConsulta: ['2000-06-12T11:52:28.397', [Validators.required]],
+      dataConsulta: ['2023-06-12T11:52:28.397', [Validators.required]],
       dataCancelamento: [''],
       valorConsulta: ['', [Validators.required]],
       cliente: this.formBuilder.group({
@@ -52,7 +55,7 @@ export class AgendamentosCreateComponent implements OnInit {
   }
 
   // click() {
-  //   if (this.agendamentos.id != null) {
+  //   if (this.formGroupAgendamentos.value.id) {
   //     this.agendamentosService
   //       .update(this.formGroupAgendamentos.value)
   //       .subscribe(() => {
@@ -76,4 +79,13 @@ export class AgendamentosCreateComponent implements OnInit {
   ngOnInit(): void {
     this.createForm(new Agendamentos());
   }
+
+  // icon() {
+  //   this.createForm(new Agendamentos());
+  //   const id = this.route.snapshot.paramMap.get('id');
+  //   this.agendamentosService.readById(id).subscribe((agendamentos) => {
+  //     this.agendamentos = agendamentos;
+  //     this.formGroupAgendamentos.patchValue(agendamentos);
+  //   });
+  // }
 }

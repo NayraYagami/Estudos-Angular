@@ -3,3 +3,12 @@ form {
   flex-direction: column;
   margin-top: 1rem;
 }
+#button-accent {
+  background-color: #753f65;
+  color: #fff;
+}
+
+#button-sec {
+  background-color: #f785d4;
+  margin-top: 0.5rem;
+}

@@ -15,8 +15,4 @@ export class EspecialidadeMedicoCrudComponent implements OnInit {
     };
   }
   ngOnInit(): void {}
-
-  navigateToEspecialidadeMedicoCreate(): void {
-    this.router.navigate(['/especialidadeMedico/create']);
-  }
 }

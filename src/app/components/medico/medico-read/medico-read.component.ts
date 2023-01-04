@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MedicoService } from './../medico.service';
 import { MedicoSearch } from './../medico.model';
@@ -11,8 +12,27 @@ import { Component, OnInit } from '@angular/core';
 export class MedicoReadComponent implements OnInit {
   constructor(
     private medicoService: MedicoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
+
+  sexoOption: any[];
+  ativoOption: any[];
+
+  getSexo() {
+    return [
+      { value: 'MASCULINO', desc: 'Masculino' },
+      { value: 'FEMININO', desc: 'Feminino' },
+      { value: 'T_REX', desc: 'T_Rex' },
+    ];
+  }
+
+  getAtivo() {
+    return [
+      { value: true, desc: 'Ativo' },
+      { value: false, desc: 'Cancelado' },
+    ];
+  }
 
   displayedColumns = [
     'id',
@@ -31,6 +51,7 @@ export class MedicoReadComponent implements OnInit {
     dataCriacaoInicio: '',
     dataCriacaoFim: '',
     ativo: null,
+    sexo: null,
   };
 
   medicosSearch: MedicoSearch[];
@@ -38,6 +59,7 @@ export class MedicoReadComponent implements OnInit {
   public formGroupMedico: FormGroup;
 
   search() {
+    console.log(this.formGroupMedico.value);
     this.medicoService
       .read(this.formGroupMedico.value)
       .subscribe((medicosSearch) => {
@@ -54,10 +76,17 @@ export class MedicoReadComponent implements OnInit {
       dataCriacaoInicio: [''],
       dataCriacaoFim: [''],
       ativo: [''],
+      sexo: [null],
     });
   }
 
+  navigateToMedicoCreate(): void {
+    this.router.navigate(['/medico/create']);
+  }
+
   ngOnInit(): void {
+    this.ativoOption = this.getAtivo();
+    this.sexoOption = this.getSexo();
     this.createForm(this.medicoSearch);
   }
 }
