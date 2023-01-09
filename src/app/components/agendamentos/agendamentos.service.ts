@@ -40,6 +40,10 @@ export class AgendamentosService {
     return this.http.post<Agendamentos>(this.baseUrl, agendamento);
   }
 
+  findAll(): Observable<Agendamentos[]> {
+    return this.http.get<Agendamentos[]>(this.baseUrl);
+  }
+
   read(
     agendamentosSearch: AgendamentosSearch
   ): Observable<AgendamentosSearch[]> {

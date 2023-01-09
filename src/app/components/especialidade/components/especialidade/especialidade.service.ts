@@ -30,6 +30,10 @@ export class EspecialidadeService {
     );
   }
 
+  findAll(): Observable<Especialidade[]> {
+    return this.http.get<Especialidade[]>(this.baseUrl);
+  }
+
   handleError(e: any): Observable<any> {
     this.showMenssage('Erro :)', true);
     return EMPTY;

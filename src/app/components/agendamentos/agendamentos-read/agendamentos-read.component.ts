@@ -1,8 +1,12 @@
+import { EspecialidadeRead2DataSource } from './../../especialidade/components/especialidade/especialidade-read2/especialidade-read2-datasource';
+import { MatTable } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AgendamentosSearch } from './../agendamentos.model';
+import { Agendamentos, AgendamentosSearch } from './../agendamentos.model';
 import { AgendamentosService } from './../agendamentos.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-agendamentos-read',
@@ -10,6 +14,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./agendamentos-read.component.css'],
 })
 export class AgendamentosReadComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatTable) table!: MatTable<Agendamentos>;
+
   constructor(
     private agendamentosService: AgendamentosService,
     private router: Router,

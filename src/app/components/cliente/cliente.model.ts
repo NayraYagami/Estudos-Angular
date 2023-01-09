@@ -14,7 +14,7 @@ export interface ClienteSearch {
 }
 
 export class Cliente {
-  id?: number;
+  id: number;
   telefones: Telefones[];
   emails: Email[];
   dataCriacao: string;

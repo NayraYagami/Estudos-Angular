@@ -1,8 +1,8 @@
 import { Pessoa } from './pessoa.model';
 export class Medico {
-  id?: number;
-  dataCriacao: Date;
-  dataExclusao: Date;
+  id: number;
+  dataCriacao: string;
+  dataExclusao: string;
   crm: string;
   pessoa: Pessoa;
 }

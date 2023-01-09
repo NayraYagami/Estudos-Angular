@@ -28,6 +28,10 @@ export class MedicoService {
     return EMPTY;
   }
 
+  findAll(): Observable<Medico[]> {
+    return this.http.get<Medico[]>(this.baseUrl);
+  }
+
   create(medico: Medico): Observable<Medico> {
     return this.http.post<Medico>(this.baseUrl, medico);
   }

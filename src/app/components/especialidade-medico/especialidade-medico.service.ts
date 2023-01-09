@@ -51,6 +51,15 @@ export class EspecialidadeMedicoService {
     );
   }
 
+  findAll(
+    especialidadeMedicoSearch: EspecialidadeMedicoSearch
+  ): Observable<EspecialidadeMedico[]> {
+    return this.http.post<EspecialidadeMedico[]>(
+      this.baseUrlSearch,
+      especialidadeMedicoSearch
+    );
+  }
+
   delete(id: number): Observable<EspecialidadeMedico> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.delete<EspecialidadeMedico>(url).pipe(

@@ -1,15 +1,36 @@
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { EspecialidadeMedicoService } from './../../especialidade-medico.service';
-import { EspecialidadeMedicoSearch } from './../../especialidade-medico.model';
+import {
+  EspecialidadeMedicoSearch,
+  EspecialidadeMedico,
+} from './../../especialidade-medico.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-especialidade-medico-read',
   templateUrl: './especialidade-medico-read.component.html',
   styleUrls: ['./especialidade-medico-read.component.css'],
 })
-export class EspecialidadeMedicoReadComponent implements OnInit {
+export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatTable) table!: MatTable<EspecialidadeMedico>;
+
+  especialidadesMedico: EspecialidadeMedico[] = [];
+  dataSource = new MatTableDataSource<EspecialidadeMedico>(
+    this.especialidadesMedico
+  );
+
+  pageEvent: PageEvent;
+  length = 50;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+
   constructor(
     private especialidadeMedicoService: EspecialidadeMedicoService,
     private formBuilder: FormBuilder,
@@ -20,10 +41,26 @@ export class EspecialidadeMedicoReadComponent implements OnInit {
     this.createForm(this.especialidadeMedicoSearch);
   }
 
+  ngAfterViewInit(): void {
+    this.findAll();
+  }
+
+  findAll(): void {
+    this.especialidadeMedicoService
+      .findAll(this.especialidadeMedicoSearch)
+      .subscribe((resposta) => {
+        this.especialidadesMedico = resposta;
+        this.dataSource = new MatTableDataSource<EspecialidadeMedico>(
+          this.especialidadesMedico
+        );
+        this.dataSource.paginator = this.paginator;
+      });
+  }
+
   displayedColumns = [
     'idEspecialidade',
     'IdMedico',
-    'nomeESpecialidade',
+    'nomeEspecialidade',
     'nomeMedico',
     'idEspecialidadeMedico',
     'action',
@@ -47,7 +84,6 @@ export class EspecialidadeMedicoReadComponent implements OnInit {
 
   private getFilter(): EspecialidadeMedicoSearch {
     let filter: EspecialidadeMedicoSearch = new EspecialidadeMedicoSearch();
-    debugger;
     filter.idsMedico = new Array<number>();
     filter.idsEspecialidade = new Array<number>();
     let idEspecialidadeInput =
@@ -93,4 +129,19 @@ export class EspecialidadeMedicoReadComponent implements OnInit {
   navigateToEspecialidadeMedicoCreate(): void {
     this.router.navigate(['/especialidadeMedico/create']);
   }
+
+  // handlePageEvent(e: PageEvent) {
+  //   this.pageEvent = e;
+  //   this.length = e.length;
+  //   this.pageSize = e.pageSize;
+  //   this.pageIndex = e.pageIndex;
+  // }
+
+  // setPageSizeOptions(setPageSizeOptionsInput: string) {
+  //   if (setPageSizeOptionsInput) {
+  //     this.pageSizeOptions = setPageSizeOptionsInput
+  //       .split(',')
+  //       .map((str) => +str);
+  //   }
+  // }
 }

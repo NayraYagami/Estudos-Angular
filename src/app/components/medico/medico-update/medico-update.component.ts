@@ -55,7 +55,9 @@ export class MedicoUpdateComponent implements OnInit {
       this.router.navigate(['/medico']);
     });
   }
-  cancel() {}
+  cancel() {
+    this.router.navigate(['/medico']);
+  }
 
   ngOnInit(): void {
     this.sexoOption = this.getSexo();
