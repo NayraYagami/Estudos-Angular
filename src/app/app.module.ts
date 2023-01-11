@@ -4,8 +4,8 @@ import { AgendamentoModule } from './components/agendamentos/agendamentos.module
 import { MedicoModule } from './components/medico/medico.module';
 import { EspecialidadeMedicoModule } from './components/especialidade-medico/especialidade-medico.module';
 import { EspecialidadeModule } from './components/especialidade/especialidade.module';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { NgModule, LOCALE_ID, Component } from '@angular/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,8 +21,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { HomeComponent } from './views/home/home.component';
-import { AgendamentoCrudComponent } from './views/agendamento-crud/agendamento-crud.component';
-import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
