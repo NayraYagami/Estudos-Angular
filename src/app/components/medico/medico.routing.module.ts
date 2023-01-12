@@ -1,6 +1,5 @@
+import { MedicoFormComponent } from './medico-form/medico-form.component';
 import { MedicoDeleteComponent } from './medico-delete/medico-delete.component';
-import { MedicoUpdateComponent } from './medico-update/medico-update.component';
-import { MedicoCreate2Component } from './medico-create2/medico-create2.component';
 import { MedicoCrudComponent } from './../../views/medico-crud/medico-crud.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -11,12 +10,12 @@ const medicoRoutes = [
     component: MedicoCrudComponent,
   },
   {
-    path: 'medico/create',
-    component: MedicoCreate2Component,
+    path: 'medico/form',
+    component: MedicoFormComponent,
   },
   {
-    path: 'medico/update/:id',
-    component: MedicoUpdateComponent,
+    path: 'medico/form/:id',
+    component: MedicoFormComponent,
   },
   {
     path: 'medico/delete/:id',

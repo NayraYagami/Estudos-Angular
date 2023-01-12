@@ -1,6 +1,5 @@
+import { EspecialidadeFormComponent } from './components/especialidade/especialidade-form/especialidade-form.component';
 import { EspecialidadeDeleteComponent } from './components/especialidade/especialidade-delete/especialidade-delete.component';
-import { EspecialidadeUpdateComponent } from './components/especialidade/especialidade-update/especialidade-update.component';
-import { EspecialidadeCreateComponent } from './components/especialidade/especialidade-create/especialidade-create.component';
 import { EspecialidadeCrudComponent } from './../../views/especialidade-crud/especialidade-crud.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -11,12 +10,12 @@ const especialidadeRoutes = [
     component: EspecialidadeCrudComponent,
   },
   {
-    path: 'especialidade/create',
-    component: EspecialidadeCreateComponent,
+    path: 'especialidade/form/:id',
+    component: EspecialidadeFormComponent,
   },
   {
-    path: 'especialidade/update/:id',
-    component: EspecialidadeUpdateComponent,
+    path: 'especialidade/form',
+    component: EspecialidadeFormComponent,
   },
   {
     path: 'especialidade/delete/:id',

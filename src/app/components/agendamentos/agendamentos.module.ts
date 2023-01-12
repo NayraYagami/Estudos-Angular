@@ -17,10 +17,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AgendamentosUpdateComponent } from './agendamentos-update/agendamentos-update.component';
 import { AgendamentosReadComponent } from './agendamentos-read/agendamentos-read.component';
-import { AgendamentosCreateComponent } from './agendamentos-create/agendamentos-create.component';
 import { AgendamentosDeleteComponent } from './agendamentos-delete/agendamentos-delete.component';
+import { AgendamentosFormComponent } from './agendamentos-form/agendamentos-form.component';
 @NgModule({
   imports: [
     AgendamentoRoutingModule,
@@ -45,10 +44,9 @@ import { AgendamentosDeleteComponent } from './agendamentos-delete/agendamentos-
   exports: [],
   declarations: [
     AgendamentoCrudComponent,
-    AgendamentosCreateComponent,
     AgendamentosReadComponent,
-    AgendamentosUpdateComponent,
     AgendamentosDeleteComponent,
+    AgendamentosFormComponent,
   ],
   providers: [],
 })

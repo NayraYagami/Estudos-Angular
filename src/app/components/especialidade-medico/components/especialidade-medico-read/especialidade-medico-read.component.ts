@@ -126,8 +126,8 @@ export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
     });
   }
 
-  navigateToEspecialidadeMedicoCreate(): void {
-    this.router.navigate(['/especialidadeMedico/create']);
+  navigateToEspecialidadeMedicoForm(): void {
+    this.router.navigate(['/especialidadeMedico/form']);
   }
 
   // handlePageEvent(e: PageEvent) {

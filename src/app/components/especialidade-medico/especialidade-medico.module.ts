@@ -1,6 +1,5 @@
 import { EspecialidadeMedicoDeleteComponent } from './components/especialidade-medico-delete/especialidade-medico-delete.component';
 import { EspecialidadeMedicoReadComponent } from './components/especialidade-medico-read/especialidade-medico-read.component';
-import { EspecialidadeMedicoCreateComponent } from './components/especialidade-medico-create/especialidade-medico-create.component';
 import { EspecialidadeMedicoCrudComponent } from './../../views/especialidade-medico-crud/especialidade-medico-crud.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSortModule } from '@angular/material/sort';
@@ -20,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EspecialidadeMedicoRoutingModule } from './especialidade-medico.routing.module';
+import { EspecialidadeMedicoFormComponent } from './components/especialidade-medico-form/especialidade-medico-form.component';
 
 @NgModule({
   imports: [
@@ -45,9 +45,9 @@ import { EspecialidadeMedicoRoutingModule } from './especialidade-medico.routing
   exports: [],
   declarations: [
     EspecialidadeMedicoCrudComponent,
-    EspecialidadeMedicoCreateComponent,
     EspecialidadeMedicoReadComponent,
     EspecialidadeMedicoDeleteComponent,
+    EspecialidadeMedicoFormComponent,
   ],
   providers: [],
 })

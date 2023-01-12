@@ -16,11 +16,21 @@ table {
   color: #fff;
 }
 
+#button {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
 #button-sec {
   background-color: #f785d4;
   margin-top: 0.5rem;
 }
 
-.delete > i {
+.button > i {
+  color: #753f65;
+}
+
+#buttonDelete {
   color: #753f65;
 }

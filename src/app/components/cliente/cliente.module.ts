@@ -1,8 +1,6 @@
 import { ClienteRoutingModule } from './cliente.routing.module';
 import { ClienteDeleteComponent } from './cliente-delete/cliente-delete.component';
-import { ClienteUpdateComponent } from './cliente-update/cliente-update.component';
 import { ClienteReadComponent } from './cliente-read/cliente-read.component';
-import { ClienteCreateComponent } from './cliente-create/cliente-create.component';
 import { ClienteCrudComponent } from './../../views/cliente-crud/cliente-crud.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSortModule } from '@angular/material/sort';
@@ -21,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 @NgModule({
   imports: [
     ClienteRoutingModule,
@@ -45,10 +44,9 @@ import { NgModule } from '@angular/core';
   exports: [],
   declarations: [
     ClienteCrudComponent,
-    ClienteCreateComponent,
     ClienteReadComponent,
-    ClienteUpdateComponent,
     ClienteDeleteComponent,
+    ClienteFormComponent,
   ],
   providers: [],
 })

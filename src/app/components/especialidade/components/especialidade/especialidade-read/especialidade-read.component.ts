@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { EspecialidadeService } from './../especialidade.service';
@@ -15,7 +17,11 @@ export class EspecialidadeReadComponent implements OnInit, AfterViewInit {
 
   especialidades: Especialidade[] = [];
   displayedColumns = ['id', 'descricao', 'action'];
-  constructor(private especialidadeService: EspecialidadeService) {}
+  constructor(
+    private especialidadeService: EspecialidadeService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   dataSource = new MatTableDataSource<Especialidade>(this.especialidades);
 
@@ -34,6 +40,54 @@ export class EspecialidadeReadComponent implements OnInit, AfterViewInit {
       );
       this.dataSource.paginator = this.paginator;
     });
+  }
+
+  sweetAlert(id: number) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Deseja de fato Deletar?',
+        text: 'Essa operação não pode ser desfeita!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, deletar!',
+        cancelButtonText: 'Não, cancelar!',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          debugger;
+          this.especialidadeService.delete(id).subscribe(
+            () => {
+              swalWithBootstrapButtons.fire(
+                'Deletado!',
+                'Especialidade deletada com sucesso!',
+                'success'
+              );
+            },
+            (error) => {}
+          );
+          this.router.navigate(['/especialidade']);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Operação cancelada',
+            'Especialidade ativa :)',
+            'error'
+          );
+          this.router.navigate(['/especialidade']);
+        }
+      });
+  }
+
+  navigateToEspecialidadeForm() {
+    this.router.navigate(['/especialidade/form']);
   }
 
   ngAfterViewInit(): void {

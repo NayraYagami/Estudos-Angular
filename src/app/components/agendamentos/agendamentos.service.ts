@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, EMPTY } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -55,6 +54,7 @@ export class AgendamentosService {
   }
 
   delete(id: number): Observable<Agendamentos> {
+    debugger;
     const url = `${this.baseUrl}/${id}`;
     return this.http.delete<Agendamentos>(url).pipe(
       map((obj) => obj),

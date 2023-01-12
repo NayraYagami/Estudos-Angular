@@ -1,5 +1,5 @@
+import { EspecialidadeMedicoFormComponent } from './components/especialidade-medico-form/especialidade-medico-form.component';
 import { EspecialidadeMedicoDeleteComponent } from './components/especialidade-medico-delete/especialidade-medico-delete.component';
-import { EspecialidadeMedicoCreateComponent } from './components/especialidade-medico-create/especialidade-medico-create.component';
 import { EspecialidadeMedicoCrudComponent } from './../../views/especialidade-medico-crud/especialidade-medico-crud.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -10,8 +10,8 @@ const especialidadeMedicoRoutes = [
     component: EspecialidadeMedicoCrudComponent,
   },
   {
-    path: 'especialidadeMedico/create',
-    component: EspecialidadeMedicoCreateComponent,
+    path: 'especialidadeMedico/form',
+    component: EspecialidadeMedicoFormComponent,
   },
   {
     path: 'especialidadeMedico/delete/:id',

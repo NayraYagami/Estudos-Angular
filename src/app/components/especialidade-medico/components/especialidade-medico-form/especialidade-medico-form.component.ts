@@ -1,14 +1,14 @@
-import { EspecialidadeMedico } from '../../especialidade-medico.model';
-import { EspecialidadeMedicoService } from '../../especialidade-medico.service';
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EspecialidadeMedicoService } from './../../especialidade-medico.service';
+import { EspecialidadeMedico } from './../../especialidade-medico.model';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-especialidade-medico-create',
-  templateUrl: './especialidade-medico-create.component.html',
-  styleUrls: ['./especialidade-medico-create.component.css'],
+  selector: 'app-especialidade-medico-form',
+  templateUrl: './especialidade-medico-form.component.html',
+  styleUrls: ['./especialidade-medico-form.component.css'],
 })
-export class EspecialidadeMedicoCreateComponent implements OnInit {
+export class EspecialidadeMedicoFormComponent implements OnInit {
   especialidadeMedico: EspecialidadeMedico = {
     medicoId: null,
     especialidadeId: null,

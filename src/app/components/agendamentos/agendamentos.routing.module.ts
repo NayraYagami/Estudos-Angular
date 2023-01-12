@@ -1,22 +1,25 @@
+import { AgendamentosFormComponent } from './agendamentos-form/agendamentos-form.component';
 import { AgendamentosDeleteComponent } from './agendamentos-delete/agendamentos-delete.component';
-import { AgendamentosUpdateComponent } from './agendamentos-update/agendamentos-update.component';
-import { AgendamentosCreateComponent } from './agendamentos-create/agendamentos-create.component';
 import { AgendamentoCrudComponent } from './../../views/agendamento-crud/agendamento-crud.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-const agendamentoRoutes = [
+const agendamentoRoutes: Routes = [
   {
-    path: 'agendamento',
+    path: 'agendamentos',
     component: AgendamentoCrudComponent,
   },
   {
-    path: 'agendamentos/create',
-    component: AgendamentosCreateComponent,
+    path: 'agendamentos/form',
+    component: AgendamentosFormComponent,
   },
   {
-    path: 'agendamentos/update/:id',
-    component: AgendamentosUpdateComponent,
+    path: 'agendamentos/form/:id',
+    component: AgendamentosFormComponent,
+  },
+  {
+    path: 'agendamentos/form/delete/:id',
+    component: AgendamentoCrudComponent,
   },
   {
     path: 'agendamentos/delete/:id',

@@ -16,12 +16,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EspecialidadeDeleteComponent } from './components/especialidade/especialidade-delete/especialidade-delete.component';
-import { EspecialidadeUpdateComponent } from './components/especialidade/especialidade-update/especialidade-update.component';
 import { EspecialidadeReadComponent } from './components/especialidade/especialidade-read/especialidade-read.component';
-import { EspecialidadeRead2Component } from './components/especialidade/especialidade-read2/especialidade-read2.component';
-import { EspecialidadeCreateComponent } from './components/especialidade/especialidade-create/especialidade-create.component';
 import { EspecialidadeCrudComponent } from './../../views/especialidade-crud/especialidade-crud.component';
 import { NgModule } from '@angular/core';
+import { EspecialidadeFormComponent } from './components/especialidade/especialidade-form/especialidade-form.component';
 @NgModule({
   imports: [
     EspecialidadeRoutingModule,
@@ -46,11 +44,9 @@ import { NgModule } from '@angular/core';
   exports: [],
   declarations: [
     EspecialidadeCrudComponent,
-    EspecialidadeCreateComponent,
     EspecialidadeReadComponent,
-    EspecialidadeRead2Component,
-    EspecialidadeUpdateComponent,
     EspecialidadeDeleteComponent,
+    EspecialidadeFormComponent,
   ],
   providers: [],
 })

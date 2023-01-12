@@ -1,18 +1,19 @@
 import { Cliente } from './../cliente.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ClienteService } from './../cliente.service';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-cliente-create',
-  templateUrl: './cliente-create.component.html',
-  styleUrls: ['./cliente-create.component.css'],
+  selector: 'app-cliente-form',
+  templateUrl: './cliente-form.component.html',
+  styleUrls: ['./cliente-form.component.css'],
 })
-export class ClienteCreateComponent implements OnInit {
+export class ClienteFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
@@ -51,17 +52,30 @@ export class ClienteCreateComponent implements OnInit {
     return this.formGroupCliente.get('emails') as FormArray;
   }
 
+  getSexo() {
+    return [
+      { value: 'MASCULINO', desc: 'Masculino' },
+      { value: 'FEMININO', desc: 'Feminino' },
+      { value: 'T_REX', desc: 'T_Rex' },
+    ];
+  }
+
   ngOnInit(): void {
     this.sexoOption = this.getSexo();
     this.createForm(new Cliente());
-  }
-
-  createCliente(): void {
-    console.log(this.formGroupCliente.value);
-    this.clienteService.create(this.formGroupCliente.value).subscribe(() => {
-      this.clienteService.showMenssage('Operação executada com sucesso!');
-      this.router.navigate(['/cliente']);
-    });
+    if (!!this.route.snapshot.paramMap.get('id')) {
+      const id = this.route.snapshot.paramMap.get('id');
+      this.clienteService.readById(id).subscribe((cliente) => {
+        this.cliente = cliente;
+        this.formGroupCliente.patchValue(cliente);
+        this.cliente.telefones.map((telefone) =>
+          this.adicionarTelefone(telefone.numeroTelefone)
+        );
+        this.cliente.emails.map((email) =>
+          this.adicionarEmail(email.enderecoEmail)
+        );
+      });
+    }
   }
 
   adicionarTelefone(numeroTelefone: string) {
@@ -79,12 +93,18 @@ export class ClienteCreateComponent implements OnInit {
     );
   }
 
-  getSexo() {
-    return [
-      { value: 'MASCULINO', desc: 'Masculino' },
-      { value: 'FEMININO', desc: 'Feminino' },
-      { value: 'T_REX', desc: 'T_Rex' },
-    ];
+  click() {
+    if (this.formGroupCliente.value.id) {
+      this.clienteService.update(this.formGroupCliente.value).subscribe(() => {
+        this.clienteService.showMenssage('Cliente atualizado com sucesso!');
+        this.router.navigate(['/cliente']);
+      });
+    } else {
+      this.clienteService.create(this.formGroupCliente.value).subscribe(() => {
+        this.clienteService.showMenssage('Operação executada com sucesso!');
+        this.router.navigate(['/cliente']);
+      });
+    }
   }
 
   cancel(): void {

@@ -1,22 +1,24 @@
-import { Medico } from './../medico.model';
-import { Router } from '@angular/router';
+import { Medico } from './../../agendamentos/agendamentos.model';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MedicoService } from './../medico.service';
-import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-medico-create2',
-  templateUrl: './medico-create2.component.html',
-  styleUrls: ['./medico-create2.component.css'],
+  selector: 'app-medico-form',
+  templateUrl: './medico-form.component.html',
+  styleUrls: ['./medico-form.component.css'],
 })
-export class MedicoCreate2Component implements OnInit {
+export class MedicoFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private medicoService: MedicoService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   sexoOption: any[];
+  medico: Medico;
 
   public formGroupMedico: FormGroup;
 
@@ -41,6 +43,13 @@ export class MedicoCreate2Component implements OnInit {
   ngOnInit(): void {
     this.sexoOption = this.getSexo();
     this.createForm(new Medico());
+    if (!!this.route.snapshot.paramMap.get('id')) {
+      const id = this.route.snapshot.paramMap.get('id');
+      this.medicoService.readById(id).subscribe((medico) => {
+        this.medico = medico;
+        this.formGroupMedico.patchValue(medico);
+      });
+    }
   }
 
   createMedico(): void {
@@ -57,6 +66,20 @@ export class MedicoCreate2Component implements OnInit {
       { value: 'FEMININO', desc: 'Feminino' },
       { value: 'T_REX', desc: 'T_Rex' },
     ];
+  }
+
+  click() {
+    if (this.formGroupMedico.value.id) {
+      this.medicoService.update(this.formGroupMedico.value).subscribe(() => {
+        this.medicoService.showMenssage('Operação executada com sucesso!');
+        this.router.navigate(['/medico']);
+      });
+    } else {
+      this.medicoService.create(this.formGroupMedico.value).subscribe(() => {
+        this.medicoService.showMenssage('Operação executada com sucesso!');
+        this.router.navigate(['/medico']);
+      });
+    }
   }
 
   cancel(): void {

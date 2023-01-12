@@ -1,12 +1,12 @@
-import { EspecialidadeRead2DataSource } from './../../especialidade/components/especialidade/especialidade-read2/especialidade-read2-datasource';
 import { MatTable } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Agendamentos, AgendamentosSearch } from './../agendamentos.model';
 import { AgendamentosService } from './../agendamentos.service';
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agendamentos-read',
@@ -21,13 +21,13 @@ export class AgendamentosReadComponent implements OnInit {
   constructor(
     private agendamentosService: AgendamentosService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
   ) {}
 
   ativoOption: any[];
 
   public formGroupAgendamentos: FormGroup;
-
   agendamentosSearch: AgendamentosSearch[];
 
   displayedColumns = [
@@ -65,8 +65,8 @@ export class AgendamentosReadComponent implements OnInit {
       });
   }
 
-  navigateToAgendamentoCreate() {
-    this.router.navigate(['/agendamentos/create']);
+  navigateToAgendamentosForm() {
+    this.router.navigate(['/agendamentos/form']);
   }
 
   getAtivo() {
@@ -90,8 +90,54 @@ export class AgendamentosReadComponent implements OnInit {
     });
   }
 
+  sweetAlert(id: number) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Deseja de fato cancelar?',
+        text: 'Essa operação não pode ser desfeita!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, cancele!',
+        cancelButtonText: 'Não, cancelar!',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          debugger;
+          this.agendamentosService.delete(id).subscribe(
+            () => {
+              swalWithBootstrapButtons.fire(
+                'Cancelado!',
+                'Agendamento cancelado com sucesso!',
+                'success'
+              );
+            },
+            (error) => {}
+          );
+          this.router.navigate(['/agendamentos']);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Operação cancelada',
+            'Agendamento ativo :)',
+            'error'
+          );
+          this.router.navigate(['/agendamentos']);
+        }
+      });
+  }
+
   ngOnInit(): void {
     this.ativoOption = this.getAtivo();
     this.createForm(this.agendamentoSearch);
   }
+
+  cancelarAgendamento() {}
 }

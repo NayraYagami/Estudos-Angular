@@ -14,3 +14,20 @@ table {
 .delete > i {
   color: #753f65;
 }
+
+#button_new {
+  margin-top: 10px;
+  background-color: #753f65;
+  width: 100%;
+  color: #fff;
+}
+
+#buttonDelete {
+  color: #753f65;
+}
+
+#button {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}

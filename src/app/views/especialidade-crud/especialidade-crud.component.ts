@@ -16,8 +16,4 @@ export class EspecialidadeCrudComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  navigateToEspecialidadeCreate(): void {
-    this.router.navigate(['/especialidade/create']);
-  }
 }

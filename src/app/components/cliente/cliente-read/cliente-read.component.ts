@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClienteSearch } from './../cliente.model';
@@ -80,6 +81,50 @@ export class ClienteReadComponent implements OnInit {
     });
   }
 
+  sweetAlert(id: number) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Deseja de fato Deletar?',
+        text: 'Essa operação não pode ser desfeita!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, deletar!',
+        cancelButtonText: 'Não, cancelar!',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          // debugger;
+          this.clienteService.delete(id).subscribe(
+            () => {
+              swalWithBootstrapButtons.fire(
+                'Cancelado!',
+                'Cliente deletado com sucesso!',
+                'success'
+              );
+            },
+            (error) => {}
+          );
+          this.router.navigate(['/cliente']);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Operação cancelada',
+            'Cliente ativo :)',
+            'error'
+          );
+          this.router.navigate(['/cliente']);
+        }
+      });
+  }
+
   getAtivo() {
     return [
       { value: true, desc: 'Ativo' },
@@ -87,8 +132,8 @@ export class ClienteReadComponent implements OnInit {
     ];
   }
 
-  navigateToClienteCreate() {
-    this.router.navigate(['/cliente/create']);
+  navigateToClienteForm() {
+    this.router.navigate(['/cliente/form']);
   }
 
   ngOnInit(): void {

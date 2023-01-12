@@ -42,12 +42,12 @@ export class AgendamentosDeleteComponent {
       this.agendamentosService.showMenssage(
         'Agendamento cancelado com sucesso!'
       );
-      this.router.navigate(['/agendamento']);
+      this.router.navigate(['/agendamentos']);
     });
   }
 
   cancel() {
-    this.router.navigate(['/agendamento']);
+    this.router.navigate(['/agendamentos']);
   }
   ngOnInit(): void {
     this.createForm(new Agendamentos());

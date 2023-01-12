@@ -80,8 +80,8 @@ export class MedicoReadComponent implements OnInit {
     });
   }
 
-  navigateToMedicoCreate(): void {
-    this.router.navigate(['/medico/create']);
+  navigateToMedicoForm(): void {
+    this.router.navigate(['/medico/form']);
   }
 
   ngOnInit(): void {

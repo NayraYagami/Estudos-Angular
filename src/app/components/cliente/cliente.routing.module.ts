@@ -1,6 +1,5 @@
+import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { ClienteDeleteComponent } from './cliente-delete/cliente-delete.component';
-import { ClienteUpdateComponent } from './cliente-update/cliente-update.component';
-import { ClienteCreateComponent } from './cliente-create/cliente-create.component';
 import { ClienteCrudComponent } from './../../views/cliente-crud/cliente-crud.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -11,12 +10,12 @@ const clienteRoutes = [
     component: ClienteCrudComponent,
   },
   {
-    path: 'cliente/create',
-    component: ClienteCreateComponent,
+    path: 'cliente/form',
+    component: ClienteFormComponent,
   },
   {
-    path: 'cliente/update/:id',
-    component: ClienteUpdateComponent,
+    path: 'cliente/form/:id',
+    component: ClienteFormComponent,
   },
   {
     path: 'cliente/delete/:id',
