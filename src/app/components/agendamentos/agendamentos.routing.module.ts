@@ -1,5 +1,4 @@
 import { AgendamentosFormComponent } from './agendamentos-form/agendamentos-form.component';
-import { AgendamentosDeleteComponent } from './agendamentos-delete/agendamentos-delete.component';
 import { AgendamentoCrudComponent } from './../../views/agendamento-crud/agendamento-crud.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -20,10 +19,6 @@ const agendamentoRoutes: Routes = [
   {
     path: 'agendamentos/form/delete/:id',
     component: AgendamentoCrudComponent,
-  },
-  {
-    path: 'agendamentos/delete/:id',
-    component: AgendamentosDeleteComponent,
   },
 ];
 @NgModule({

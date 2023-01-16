@@ -18,7 +18,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AgendamentosReadComponent } from './agendamentos-read/agendamentos-read.component';
-import { AgendamentosDeleteComponent } from './agendamentos-delete/agendamentos-delete.component';
 import { AgendamentosFormComponent } from './agendamentos-form/agendamentos-form.component';
 @NgModule({
   imports: [
@@ -45,7 +44,6 @@ import { AgendamentosFormComponent } from './agendamentos-form/agendamentos-form
   declarations: [
     AgendamentoCrudComponent,
     AgendamentosReadComponent,
-    AgendamentosDeleteComponent,
     AgendamentosFormComponent,
   ],
   providers: [],

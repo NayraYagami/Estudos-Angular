@@ -10,6 +10,7 @@
           formControlName="id"
           id="id"
           name="id"
+          [readonly]="!childmessage"
         />
       </mat-form-field>
 
@@ -86,7 +87,13 @@
 
     <mat-form-field class="form-group">
       <label for="id">id medico:</label>
-      <input matInput placeholder="id medico" formControlName="id" name="id" />
+      <input
+        matInput
+        placeholder="id medico"
+        formControlName="id"
+        name="id"
+        [readonly]="!childmessage"
+      />
     </mat-form-field>
 
     <mat-form-field class="form-group">
@@ -116,6 +123,8 @@
       />
     </mat-form-field>
   </form>
-  <button mat-raised-button (click)="click()" id="button-accent">Salvar</button>
-  <button mat-raised-button (click)="cancel()" id="button-sec">Cancelar</button>
+  <button mat-raised-button (click)="sweetAlert()" id="button-accent">
+    Salvar
+  </button>
+  <button mat-raised-button (click)="cancel()" id="button-sec">Voltar</button>
 </mat-card>

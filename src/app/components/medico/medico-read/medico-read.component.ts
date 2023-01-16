@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MedicoService } from './../medico.service';
@@ -43,6 +44,49 @@ export class MedicoReadComponent implements OnInit {
     'dataCriacaoFim',
     'actions',
   ];
+
+  sweetAlert(id: number) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Deseja de fato Deletar?',
+        text: 'Essa operação não pode ser desfeita!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, deletar!',
+        cancelButtonText: 'Não, cancelar!',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.medicoService.delete(id).subscribe(
+            () => {
+              swalWithBootstrapButtons.fire(
+                'Deletado!',
+                'Médico deletado com sucesso!',
+                'success'
+              );
+            },
+            (error) => {}
+          );
+          this.router.navigate(['/medico']);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Operação cancelada',
+            'Médico ativo :)',
+            'error'
+          );
+          this.router.navigate(['/medico']);
+        }
+      });
+  }
 
   medicoSearch: MedicoSearch = {
     idMedico: null,

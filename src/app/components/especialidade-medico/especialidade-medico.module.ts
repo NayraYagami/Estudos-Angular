@@ -1,4 +1,3 @@
-import { EspecialidadeMedicoDeleteComponent } from './components/especialidade-medico-delete/especialidade-medico-delete.component';
 import { EspecialidadeMedicoReadComponent } from './components/especialidade-medico-read/especialidade-medico-read.component';
 import { EspecialidadeMedicoCrudComponent } from './../../views/especialidade-medico-crud/especialidade-medico-crud.component';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -46,7 +45,6 @@ import { EspecialidadeMedicoFormComponent } from './components/especialidade-med
   declarations: [
     EspecialidadeMedicoCrudComponent,
     EspecialidadeMedicoReadComponent,
-    EspecialidadeMedicoDeleteComponent,
     EspecialidadeMedicoFormComponent,
   ],
   providers: [],

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Agendamentos } from './../agendamentos.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AgendamentosService } from './../agendamentos.service';
@@ -43,26 +44,65 @@ export class AgendamentosFormComponent implements OnInit {
     });
   }
 
-  click() {
-    if (this.formGroupAgendamentos.value.id) {
-      this.agendamentosService
-        .update(this.formGroupAgendamentos.value)
-        .subscribe(() => {
-          this.agendamentosService.showMenssage(
-            'Agendamento atualizado com sucesso!'
-          );
+  sweetAlert() {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Enviar dados do agendamento',
+        text: 'Para cancelar clique em voltar!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Enviar',
+        cancelButtonText: 'Voltar',
+        reverseButtons: false,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.validateForm(this.formGroupAgendamentos);
+          if (this.formGroupAgendamentos.value.id) {
+            this.agendamentosService
+              .update(this.formGroupAgendamentos.value)
+              .subscribe(
+                () => {
+                  swalWithBootstrapButtons.fire(
+                    'Atualizado!',
+                    'Agendamento atualizado com sucesso!',
+                    'success'
+                  );
+                },
+                (error) => {
+                  swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+                }
+              );
+            this.router.navigate(['/agendamentos']);
+          } else {
+            this.agendamentosService
+              .create(this.formGroupAgendamentos.value)
+              .subscribe(
+                () => {
+                  swalWithBootstrapButtons.fire(
+                    'Agendado!',
+                    'Agendamento confirmado!',
+                    'success'
+                  );
+                },
+                (error) => {
+                  swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+                }
+              );
+          }
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire('Operação cancelada', '', 'error');
           this.router.navigate(['/agendamentos']);
-        });
-    } else {
-      this.agendamentosService
-        .create(this.formGroupAgendamentos.value)
-        .subscribe(() => {
-          this.agendamentosService.showMenssage(
-            'Operação executada com sucesso!'
-          );
-          this.router.navigate(['/agendamentos']);
-        });
-    }
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -73,6 +113,35 @@ export class AgendamentosFormComponent implements OnInit {
         this.agendamentos = agendamentos;
         this.formGroupAgendamentos.patchValue(agendamentos);
       });
+    }
+  }
+
+  get dataAbertura() {
+    return this.formGroupAgendamentos.get('dataAbertura');
+  }
+
+  validateForm(formGroupAgendamentos: FormGroup): any {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+
+    if (!this.formGroupAgendamentos.get('dataAbertura')) {
+      return swalWithBootstrapButtons.fire(
+        'Data de abertura nula ou  vazia!',
+        '',
+        'error'
+      );
+    }
+    if (!this.formGroupAgendamentos.get('valorConsulta')) {
+      return swalWithBootstrapButtons.fire(
+        'Valor da consulta não informado!',
+        '',
+        'error'
+      );
     }
   }
 }

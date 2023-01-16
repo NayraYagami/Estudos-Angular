@@ -15,7 +15,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { EspecialidadeDeleteComponent } from './components/especialidade/especialidade-delete/especialidade-delete.component';
 import { EspecialidadeReadComponent } from './components/especialidade/especialidade-read/especialidade-read.component';
 import { EspecialidadeCrudComponent } from './../../views/especialidade-crud/especialidade-crud.component';
 import { NgModule } from '@angular/core';
@@ -45,7 +44,6 @@ import { EspecialidadeFormComponent } from './components/especialidade/especiali
   declarations: [
     EspecialidadeCrudComponent,
     EspecialidadeReadComponent,
-    EspecialidadeDeleteComponent,
     EspecialidadeFormComponent,
   ],
   providers: [],

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -128,6 +129,49 @@ export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
 
   navigateToEspecialidadeMedicoForm(): void {
     this.router.navigate(['/especialidadeMedico/form']);
+  }
+
+  sweetAlert(id: number) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Deseja de fato Deletar?',
+        text: 'Essa operação não pode ser desfeita!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, deletar!',
+        cancelButtonText: 'Não, cancelar!',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.especialidadeMedicoService.delete(id).subscribe(
+            () => {
+              swalWithBootstrapButtons.fire(
+                'Deletado!',
+                'Especialidade Médico deletada com sucesso!',
+                'success'
+              );
+            },
+            (error) => {}
+          );
+          this.router.navigate(['/especialidadeMedico']);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Operação cancelada',
+            'Especialidade ativa :)',
+            'error'
+          );
+          this.router.navigate(['/especialidadeMedico']);
+        }
+      });
   }
 
   // handlePageEvent(e: PageEvent) {

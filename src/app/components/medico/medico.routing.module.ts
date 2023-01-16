@@ -1,5 +1,4 @@
 import { MedicoFormComponent } from './medico-form/medico-form.component';
-import { MedicoDeleteComponent } from './medico-delete/medico-delete.component';
 import { MedicoCrudComponent } from './../../views/medico-crud/medico-crud.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -16,10 +15,6 @@ const medicoRoutes = [
   {
     path: 'medico/form/:id',
     component: MedicoFormComponent,
-  },
-  {
-    path: 'medico/delete/:id',
-    component: MedicoDeleteComponent,
   },
 ];
 

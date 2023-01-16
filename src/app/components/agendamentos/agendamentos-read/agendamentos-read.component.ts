@@ -31,14 +31,14 @@ export class AgendamentosReadComponent implements OnInit {
   agendamentosSearch: AgendamentosSearch[];
 
   displayedColumns = [
-    'id',
-    'idMedico',
-    'nomeMedico',
-    'idCliente',
     'nomeCliente',
-    'valorConsulta',
-    'dataAbertura',
+    'nomeMedico',
     'dataConsulta',
+    'valorConsulta',
+    'idMedico',
+    'idCliente',
+    'dataAbertura',
+    'id',
     'actions',
   ];
 
@@ -53,8 +53,6 @@ export class AgendamentosReadComponent implements OnInit {
     valorConsultaMinimo: null,
     ativo: null,
   };
-
-  click() {}
 
   search() {
     this.agendamentosService
@@ -111,7 +109,6 @@ export class AgendamentosReadComponent implements OnInit {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          debugger;
           this.agendamentosService.delete(id).subscribe(
             () => {
               swalWithBootstrapButtons.fire(
@@ -120,7 +117,9 @@ export class AgendamentosReadComponent implements OnInit {
                 'success'
               );
             },
-            (error) => {}
+            (error) => {
+              swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+            }
           );
           this.router.navigate(['/agendamentos']);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -138,6 +137,4 @@ export class AgendamentosReadComponent implements OnInit {
     this.ativoOption = this.getAtivo();
     this.createForm(this.agendamentoSearch);
   }
-
-  cancelarAgendamento() {}
 }

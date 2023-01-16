@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { EspecialidadeMedicoService } from './../../especialidade-medico.service';
 import { EspecialidadeMedico } from './../../especialidade-medico.model';
@@ -18,6 +19,48 @@ export class EspecialidadeMedicoFormComponent implements OnInit {
     private especialidadeMedicoService: EspecialidadeMedicoService,
     private router: Router
   ) {}
+
+  sweetAlert() {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Enviar dados da especialidade médico',
+        text: 'Para cancelar clique em voltar!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Enviar',
+        cancelButtonText: 'Voltar',
+        reverseButtons: false,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.especialidadeMedicoService
+            .create(this.especialidadeMedico)
+            .subscribe(
+              () => {
+                swalWithBootstrapButtons.fire(
+                  'Cadastrado!',
+                  'Especialidade Médico cadastrada!',
+                  'success'
+                );
+              },
+              (error) => {
+                swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+              }
+            );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire('Operação cancelada', '', 'error');
+          this.router.navigate(['/especialidadeMedico']);
+        }
+      });
+  }
 
   ngOnInit(): void {}
 

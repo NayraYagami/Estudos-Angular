@@ -111,7 +111,9 @@ export class ClienteReadComponent implements OnInit {
                 'success'
               );
             },
-            (error) => {}
+            (error) => {
+              swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+            }
           );
           this.router.navigate(['/cliente']);
         } else if (result.dismiss === Swal.DismissReason.cancel) {

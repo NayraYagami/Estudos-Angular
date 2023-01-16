@@ -24,50 +24,30 @@ export class EspecialidadeService {
   }
 
   create(especialidade: Especialidade): Observable<Especialidade> {
-    return this.http.post<Especialidade>(this.baseUrl, especialidade).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.post<Especialidade>(this.baseUrl, especialidade);
   }
 
   findAll(): Observable<Especialidade[]> {
     return this.http.get<Especialidade[]>(this.baseUrl);
   }
 
-  handleError(e: any): Observable<any> {
-    this.showMenssage('Erro :)', true);
-    return EMPTY;
-  }
-
   read(): Observable<Especialidade[]> {
-    return this.http.get<Especialidade[]>(this.baseUrl).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.get<Especialidade[]>(this.baseUrl);
   }
 
   readById(id: string): Observable<Especialidade> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.get<Especialidade>(url).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.get<Especialidade>(url);
   }
 
   update(especialidade: Especialidade): Observable<Especialidade> {
     // const url = `${this.baseUrl}/${especialidade.id}`;
     const url = `${this.baseUrl}/`;
-    return this.http.put<Especialidade>(url, especialidade).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.put<Especialidade>(url, especialidade);
   }
 
   delete(id: number): Observable<Especialidade> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.delete<Especialidade>(url).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.delete<Especialidade>(url);
   }
 }

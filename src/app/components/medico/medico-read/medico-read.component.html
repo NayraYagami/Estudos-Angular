@@ -120,8 +120,10 @@
         <a routerLink="/medico/form/{{ row.id }}" class="edit">
           <i class="material-icons">edit</i>
         </a>
-        <a routerLink="/medico/delete/{{ row.id }}" class="delete">
-          <i class="material-icons">delete</i>
+        <a class="delete">
+          <button type="button" id="button" (click)="sweetAlert(row.id)">
+            <i class="material-icons" id="buttonDelete">delete</i>
+          </button>
         </a>
         {{ row.action }}
       </td>

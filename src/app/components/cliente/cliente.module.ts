@@ -1,5 +1,4 @@
 import { ClienteRoutingModule } from './cliente.routing.module';
-import { ClienteDeleteComponent } from './cliente-delete/cliente-delete.component';
 import { ClienteReadComponent } from './cliente-read/cliente-read.component';
 import { ClienteCrudComponent } from './../../views/cliente-crud/cliente-crud.component';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -45,7 +44,6 @@ import { ClienteFormComponent } from './cliente-form/cliente-form.component';
   declarations: [
     ClienteCrudComponent,
     ClienteReadComponent,
-    ClienteDeleteComponent,
     ClienteFormComponent,
   ],
   providers: [],

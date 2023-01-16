@@ -63,7 +63,6 @@ export class EspecialidadeReadComponent implements OnInit, AfterViewInit {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          debugger;
           this.especialidadeService.delete(id).subscribe(
             () => {
               swalWithBootstrapButtons.fire(
@@ -72,7 +71,10 @@ export class EspecialidadeReadComponent implements OnInit, AfterViewInit {
                 'success'
               );
             },
-            (error) => {}
+
+            (error) => {
+              swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+            }
           );
           this.router.navigate(['/especialidade']);
         } else if (result.dismiss === Swal.DismissReason.cancel) {

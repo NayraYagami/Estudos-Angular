@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Medico } from './../../agendamentos/agendamentos.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MedicoService } from './../medico.service';
@@ -19,6 +20,7 @@ export class MedicoFormComponent implements OnInit {
 
   sexoOption: any[];
   medico: Medico;
+  childmessage = false;
 
   public formGroupMedico: FormGroup;
 
@@ -66,6 +68,62 @@ export class MedicoFormComponent implements OnInit {
       { value: 'FEMININO', desc: 'Feminino' },
       { value: 'T_REX', desc: 'T_Rex' },
     ];
+  }
+
+  sweetAlert() {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Enviar dados do agendamento',
+        text: 'Para cancelar clique em voltar!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Enviar',
+        cancelButtonText: 'Voltar',
+        reverseButtons: false,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          if (this.formGroupMedico.value.id) {
+            this.medicoService.update(this.formGroupMedico.value).subscribe(
+              () => {
+                swalWithBootstrapButtons.fire(
+                  'Atualizado!',
+                  'Médico atualizado com sucesso!',
+                  'success'
+                );
+              },
+              (error) => {
+                swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+              }
+            );
+            this.router.navigate(['/medico']);
+          } else {
+            this.medicoService.create(this.formGroupMedico.value).subscribe(
+              () => {
+                swalWithBootstrapButtons.fire(
+                  'Cadastrado!',
+                  'Médico cadastrado!',
+                  'success'
+                );
+              },
+              (error) => {
+                swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+              }
+            );
+          }
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire('Operação cancelada', '', 'error');
+          this.router.navigate(['/medico']);
+        }
+      });
   }
 
   click() {

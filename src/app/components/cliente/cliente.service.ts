@@ -27,36 +27,22 @@ export class ClienteService {
     });
   }
 
-  handleError(e: any): Observable<any> {
-    this.showMenssage('Erro :)', true);
-    return EMPTY;
-  }
-
   create(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(this.baseUrl, cliente);
   }
 
   delete(id: number): Observable<Cliente> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.delete<Cliente>(url).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.delete<Cliente>(url);
   }
 
   update(cliente: Cliente): Observable<Cliente> {
     const url = `${this.baseUrl}/`;
-    return this.http.put<Cliente>(url, cliente).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.put<Cliente>(url, cliente);
   }
 
   readById(id: string): Observable<Cliente> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.get<Cliente>(url).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.get<Cliente>(url);
   }
 }

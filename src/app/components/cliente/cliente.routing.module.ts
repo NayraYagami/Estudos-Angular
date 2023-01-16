@@ -1,5 +1,4 @@
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
-import { ClienteDeleteComponent } from './cliente-delete/cliente-delete.component';
 import { ClienteCrudComponent } from './../../views/cliente-crud/cliente-crud.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -16,10 +15,6 @@ const clienteRoutes = [
   {
     path: 'cliente/form/:id',
     component: ClienteFormComponent,
-  },
-  {
-    path: 'cliente/delete/:id',
-    component: ClienteDeleteComponent,
   },
 ];
 @NgModule({

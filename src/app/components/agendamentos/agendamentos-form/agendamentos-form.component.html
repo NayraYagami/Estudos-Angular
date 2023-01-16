@@ -22,6 +22,12 @@
           formControlName="dataAbertura"
         />
       </mat-form-field>
+      <div
+        class="validation-message"
+        *ngIf="formGroupAgendamentos.get('dataAbertura')?.errors?.['required'] && formGroupAgendamentos.get('dataAbertura')?.touched"
+      >
+        Data de abertura é obrigatória!
+      </div>
 
       <mat-form-field class="form-group">
         <label for="dataConsulta">Data da Consulta:</label>
@@ -33,6 +39,12 @@
           formControlName="dataConsulta"
         />
       </mat-form-field>
+      <div
+        class="validation-message"
+        *ngIf="formGroupAgendamentos.get('dataConsulta')?.errors?.['required'] && formGroupAgendamentos.get('dataConsulta')?.touched"
+      >
+        Data da consulta é obrigatória!
+      </div>
 
       <mat-form-field class="form-group">
         <label for="dataCancelamento">Data de Cancelamento:</label>
@@ -55,6 +67,12 @@
           formControlName="valorConsulta"
         />
       </mat-form-field>
+      <div
+        class="validation-message"
+        *ngIf="formGroupAgendamentos.get('valorConsulta')?.errors?.['required'] && formGroupAgendamentos.get('valorConsulta')?.touched"
+      >
+        Valor da consulta é obrigatório!
+      </div>
     </div>
 
     <div formGroupName="cliente" class="cliente">
@@ -63,6 +81,12 @@
         <input matInput formControlName="id" id="id" name="id" />
       </mat-form-field>
     </div>
+    <div
+      class="validation-message"
+      *ngIf="formGroupAgendamentos.get('cliente.id')?.errors?.['required'] && formGroupAgendamentos.get('cliente.id')?.touched"
+    >
+      Id do cliente é obrigatório!
+    </div>
 
     <div formGroupName="medico" class="medico">
       <mat-form-field class="form-group">
@@ -70,7 +94,20 @@
         <input matInput formControlName="id" id="id" name="id" />
       </mat-form-field>
     </div>
+    <div
+      class="validation-message"
+      *ngIf="formGroupAgendamentos.get('medico.id')?.errors?.['required'] && formGroupAgendamentos.get('medico.id')?.touched"
+    >
+      Id do médico é obrigatório!
+    </div>
   </form>
-  <button mat-raised-button (click)="click()" id="button-accent">Salvar</button>
-  <button mat-raised-button (click)="cancel()" id="button-sec">Cancelar</button>
+  <button
+    [disabled]="!formGroupAgendamentos.valid"
+    mat-raised-button
+    (click)="sweetAlert()"
+    id="button-accent"
+  >
+    Salvar
+  </button>
+  <button mat-raised-button (click)="cancel()" id="button-sec">Voltar</button>
 </mat-card>

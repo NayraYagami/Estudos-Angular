@@ -23,17 +23,9 @@ export class AgendamentosService {
     });
   }
 
-  handleError(e: any): Observable<any> {
-    this.showMenssage('Erro :)', true);
-    return EMPTY;
-  }
-
   update(agendamentos: Agendamentos): Observable<Agendamentos> {
     const url = `${this.baseUrl}/`;
-    return this.http.put<Agendamentos>(url, agendamentos).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.put<Agendamentos>(url, agendamentos);
   }
 
   create(agendamento: Agendamentos): Observable<Agendamentos> {
@@ -54,19 +46,12 @@ export class AgendamentosService {
   }
 
   delete(id: number): Observable<Agendamentos> {
-    debugger;
     const url = `${this.baseUrl}/${id}`;
-    return this.http.delete<Agendamentos>(url).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.delete<Agendamentos>(url);
   }
 
   readById(id: string): Observable<Agendamentos> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.get<Agendamentos>(url).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.get<Agendamentos>(url);
   }
 }

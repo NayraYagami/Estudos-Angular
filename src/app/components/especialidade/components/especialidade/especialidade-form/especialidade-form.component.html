@@ -1,27 +1,35 @@
 <mat-card>
-  <mat-card-title>Atualizar dados da especialidade:</mat-card-title>
-  <form>
-    <mat-form-field color="primary" class="input-form">
+  <mat-card-title>Dados da especialidade:</mat-card-title>
+  <form [formGroup]="formGroupEspecialidade">
+    <mat-form-field color="primary" class="form-group">
       <input
         matInput
         placeholder="Descrição"
-        [(ngModel)]="especialidade.descricao"
+        formControlName="descricao"
         name="Descrição"
+        class="form-control"
       />
     </mat-form-field>
-    <mat-form-field class="input-form">
+    <div
+      class="validation-message"
+      *ngIf="formGroupEspecialidade.get('descricao')?.errors?.['required'] && formGroupEspecialidade.get('descricao')?.touched"
+    >
+      Descrição é obrigatória!
+    </div>
+    <mat-form-field class="form-group">
       <input
         matInput
         placeholder="Id da especialidade(apenas para caso de atualização)"
-        [(ngModel)]="especialidade.id"
+        formControlName="id"
         name="Id"
-        disabled
+        class="form-control"
+        [readonly]="!childmessage"
       />
     </mat-form-field>
   </form>
-  <button mat-raised-button (click)="click()" id="button-accent">
+  <button mat-raised-button (click)="sweetAlert()" id="button-accent">
     Confirmar
   </button>
 
-  <button mat-raised-button (click)="cancel()" id="button-sec">Cancelar</button>
+  <button mat-raised-button (click)="cancel()" id="button-sec">Voltar</button>
 </mat-card>

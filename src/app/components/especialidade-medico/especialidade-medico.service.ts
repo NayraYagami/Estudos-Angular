@@ -5,7 +5,6 @@ import {
   EspecialidadeMedicoSearch,
 } from './especialidade-medico.model';
 import { HttpClient } from '@angular/common/http';
-import { validateHorizontalPosition } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -37,11 +36,6 @@ export class EspecialidadeMedicoService {
     );
   }
 
-  handleError(e: any): Observable<any> {
-    this.showMenssage('Erro :)', true);
-    return EMPTY;
-  }
-
   read(
     especialidadeMedicoSearch: EspecialidadeMedicoSearch
   ): Observable<EspecialidadeMedicoSearch[]> {
@@ -62,17 +56,11 @@ export class EspecialidadeMedicoService {
 
   delete(id: number): Observable<EspecialidadeMedico> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.delete<EspecialidadeMedico>(url).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.delete<EspecialidadeMedico>(url);
   }
 
   readById(id: string): Observable<EspecialidadeMedico> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.get<EspecialidadeMedico>(url).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.get<EspecialidadeMedico>(url);
   }
 }

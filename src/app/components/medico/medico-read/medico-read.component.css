@@ -11,16 +11,26 @@ table {
   color: #753f65;
 }
 
-.delete > i {
-  color: #753f65;
-}
-
 #button-accent {
   background-color: #753f65;
   color: #fff;
 }
 
+#button {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
 #button-sec {
   background-color: #f785d4;
   margin-top: 0.5rem;
+}
+
+.button > i {
+  color: #753f65;
+}
+
+#buttonDelete {
+  color: #753f65;
 }

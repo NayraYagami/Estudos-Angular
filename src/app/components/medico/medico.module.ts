@@ -1,5 +1,4 @@
 import { MedicoRoutingModule } from './medico.routing.module';
-import { MedicoDeleteComponent } from './medico-delete/medico-delete.component';
 import { MedicoReadComponent } from './medico-read/medico-read.component';
 import { MedicoCrudComponent } from './../../views/medico-crud/medico-crud.component';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -43,12 +42,7 @@ import { MedicoFormComponent } from './medico-form/medico-form.component';
     ReactiveFormsModule,
   ],
   exports: [],
-  declarations: [
-    MedicoCrudComponent,
-    MedicoReadComponent,
-    MedicoDeleteComponent,
-    MedicoFormComponent,
-  ],
+  declarations: [MedicoCrudComponent, MedicoReadComponent, MedicoFormComponent],
   providers: [],
 })
 export class MedicoModule {}

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Cliente } from './../cliente.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClienteService } from './../cliente.service';
@@ -22,7 +23,6 @@ export class ClienteFormComponent {
   sexoOption: any[];
 
   public formGroupCliente: FormGroup;
-
   cliente: Cliente;
 
   createForm(cliente: Cliente) {
@@ -60,6 +60,62 @@ export class ClienteFormComponent {
     ];
   }
 
+  sweetAlert() {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Enviar dados do cliente',
+        text: 'Para cancelar clique em voltar!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Enviar',
+        cancelButtonText: 'Voltar',
+        reverseButtons: false,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          if (this.formGroupCliente.value.id) {
+            this.clienteService.update(this.formGroupCliente.value).subscribe(
+              () => {
+                swalWithBootstrapButtons.fire(
+                  'Atualizado!',
+                  'Cliente atualizado com sucesso!',
+                  'success'
+                );
+              },
+              (error) => {
+                swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+              }
+            );
+            this.router.navigate(['/cliente']);
+          } else {
+            this.clienteService.create(this.formGroupCliente.value).subscribe(
+              () => {
+                swalWithBootstrapButtons.fire(
+                  'Cadastrado!',
+                  'Cliente cadastrado!',
+                  'success'
+                );
+              },
+              (error) => {
+                swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+              }
+            );
+          }
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire('Operação cancelada', '', 'error');
+          this.router.navigate(['/cliente']);
+        }
+      });
+  }
+
   ngOnInit(): void {
     this.sexoOption = this.getSexo();
     this.createForm(new Cliente());
@@ -91,20 +147,6 @@ export class ClienteFormComponent {
         enderecoEmail: enderecoEmail,
       })
     );
-  }
-
-  click() {
-    if (this.formGroupCliente.value.id) {
-      this.clienteService.update(this.formGroupCliente.value).subscribe(() => {
-        this.clienteService.showMenssage('Cliente atualizado com sucesso!');
-        this.router.navigate(['/cliente']);
-      });
-    } else {
-      this.clienteService.create(this.formGroupCliente.value).subscribe(() => {
-        this.clienteService.showMenssage('Operação executada com sucesso!');
-        this.router.navigate(['/cliente']);
-      });
-    }
   }
 
   cancel(): void {

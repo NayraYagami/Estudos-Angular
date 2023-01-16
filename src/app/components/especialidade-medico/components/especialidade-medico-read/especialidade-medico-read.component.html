@@ -68,13 +68,14 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Ações:</th>
       <td mat-cell *matCellDef="let row">
-        <a
-          routerLink="/especialidadeMedico/delete/{{
-            row.idEspecialidadeMedico
-          }}"
-          class="delete"
-        >
-          <i class="material-icons">delete</i>
+        <a class="delete">
+          <button
+            type="button"
+            id="button"
+            (click)="sweetAlert(row.idEspecialidadeMedico)"
+          >
+            <i class="material-icons" id="buttonDelete">delete</i>
+          </button>
         </a>
         {{ row.action }}
       </td>
