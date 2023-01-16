@@ -88,7 +88,7 @@ export class AgendamentosReadComponent implements OnInit {
     });
   }
 
-  sweetAlert(id: number) {
+  save(id: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -124,8 +124,8 @@ export class AgendamentosReadComponent implements OnInit {
           this.router.navigate(['/agendamentos']);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire(
-            'Operação cancelada',
-            'Agendamento ativo :)',
+            'Cancelada',
+            'Operação cancelada com sucesso :)',
             'error'
           );
           this.router.navigate(['/agendamentos']);

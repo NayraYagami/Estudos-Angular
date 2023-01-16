@@ -7,7 +7,7 @@ export class Medico {
   pessoa: Pessoa;
 }
 
-export interface MedicoSearch {
+export class MedicoSearch {
   idMedico: number;
   nomeMedico: string;
   cpf: string;
@@ -15,4 +15,5 @@ export interface MedicoSearch {
   dataCriacaoFim: string;
   ativo: boolean;
   sexo: string;
+  idsEspecialidadeMedico: number[];
 }

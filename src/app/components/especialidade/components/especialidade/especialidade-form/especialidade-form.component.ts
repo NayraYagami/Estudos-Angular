@@ -29,7 +29,7 @@ export class EspecialidadeFormComponent implements OnInit {
     });
   }
 
-  sweetAlert() {
+  save() {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',

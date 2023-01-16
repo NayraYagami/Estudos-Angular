@@ -45,7 +45,7 @@ export class MedicoReadComponent implements OnInit {
     'actions',
   ];
 
-  sweetAlert(id: number) {
+  save(id: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -74,13 +74,15 @@ export class MedicoReadComponent implements OnInit {
                 'success'
               );
             },
-            (error) => {}
+            (error) => {
+              swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+            }
           );
           this.router.navigate(['/medico']);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire(
-            'Operação cancelada',
-            'Médico ativo :)',
+            'Cancelada',
+            'Operação cancelada com sucesso :)',
             'error'
           );
           this.router.navigate(['/medico']);
@@ -96,6 +98,7 @@ export class MedicoReadComponent implements OnInit {
     dataCriacaoFim: '',
     ativo: null,
     sexo: null,
+    idsEspecialidadeMedico: null,
   };
 
   medicosSearch: MedicoSearch[];
@@ -104,12 +107,10 @@ export class MedicoReadComponent implements OnInit {
 
   search() {
     console.log(this.formGroupMedico.value);
-    this.medicoService
-      .read(this.formGroupMedico.value)
-      .subscribe((medicosSearch) => {
-        this.medicosSearch = medicosSearch;
-        console.log(medicosSearch);
-      });
+    this.medicoService.read(this.getFilter()).subscribe((medicosSearch) => {
+      this.medicosSearch = medicosSearch;
+      console.log(medicosSearch);
+    });
   }
 
   createForm(medico: MedicoSearch) {
@@ -121,7 +122,51 @@ export class MedicoReadComponent implements OnInit {
       dataCriacaoFim: [''],
       ativo: [''],
       sexo: [null],
+      idsEspecialidadeMedico: [null],
     });
+  }
+
+  private getFilter(): MedicoSearch {
+    let filter: MedicoSearch = new MedicoSearch();
+    filter.idsEspecialidadeMedico = new Array<number>();
+
+    let nomeMedico = this.formGroupMedico.get('nomeMedico').value;
+    let cpf = this.formGroupMedico.get('cpf').value;
+    let idMedico = this.formGroupMedico.get('idMedico').value;
+    let dataCriacaoInicio = this.formGroupMedico.get('dataCriacaoInicio').value;
+    let dataCriacaoFim = this.formGroupMedico.get('dataCriacaoFim').value;
+    let ativo = this.formGroupMedico.get('ativo').value;
+    let sexo = this.formGroupMedico.get('sexo').value;
+
+    let idsEspecialidadeMedicoInput = this.formGroupMedico.get(
+      'idsEspecialidadeMedico'
+    ).value;
+
+    if (!!idsEspecialidadeMedicoInput) {
+      let idsEspecialidadeMedicoList: number[] = idsEspecialidadeMedicoInput
+        .split(',')
+        .map((el) => {
+          let n = Number(el);
+          return n === 0 ? n : n || el;
+        });
+
+      if (
+        !!idsEspecialidadeMedicoList &&
+        idsEspecialidadeMedicoList.length > 0
+      ) {
+        filter.idsEspecialidadeMedico = idsEspecialidadeMedicoList;
+      }
+    }
+
+    filter.nomeMedico = nomeMedico;
+    filter.cpf = cpf;
+    filter.idMedico = idMedico;
+    filter.dataCriacaoInicio = dataCriacaoInicio;
+    filter.dataCriacaoFim = dataCriacaoFim;
+    filter.ativo = ativo;
+    filter.sexo = sexo;
+
+    return filter;
   }
 
   navigateToMedicoForm(): void {

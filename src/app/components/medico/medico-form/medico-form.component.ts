@@ -43,14 +43,23 @@ export class MedicoFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const swalWithBootstrapButtons = Swal.mixin({
+      buttonsStyling: false,
+    });
     this.sexoOption = this.getSexo();
     this.createForm(new Medico());
     if (!!this.route.snapshot.paramMap.get('id')) {
       const id = this.route.snapshot.paramMap.get('id');
-      this.medicoService.readById(id).subscribe((medico) => {
-        this.medico = medico;
-        this.formGroupMedico.patchValue(medico);
-      });
+      this.medicoService.readById(id).subscribe(
+        (medico) => {
+          this.medico = medico;
+          this.formGroupMedico.patchValue(medico);
+        },
+        (error) => {
+          swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+          this.router.navigate(['/medico']);
+        }
+      );
     }
   }
 
@@ -70,7 +79,7 @@ export class MedicoFormComponent implements OnInit {
     ];
   }
 
-  sweetAlert() {
+  save() {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',

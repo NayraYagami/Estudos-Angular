@@ -1,24 +1,54 @@
 <mat-card>
   <mat-card-title>Nova Especialidade Médico</mat-card-title>
-  <form>
+  <form [formGroup]="formGroupEspecialidadeMedico">
     <mat-form-field>
       <input
         matInput
         placeholder="Id médico"
-        [(ngModel)]="especialidadeMedico.medicoId"
+        formControlName="medicoId"
         name="medicoId"
       />
     </mat-form-field>
+
+    <div
+      class="validation-message"
+      *ngIf="formGroupEspecialidadeMedico.get('medicoId')?.errors?.['required'] && formGroupEspecialidadeMedico.get('medicoId')?.touched"
+    >
+      Id do médico é obrigatório!
+    </div>
+
     <mat-form-field>
       <input
         matInput
         placeholder="Id especialidade"
-        [(ngModel)]="especialidadeMedico.especialidadeId"
         name="especialidadeId"
+        formControlName="especialidadeId"
+      />
+    </mat-form-field>
+
+    <div
+      class="validation-message"
+      *ngIf="formGroupEspecialidadeMedico.get('especialidadeId')?.errors?.['required'] && formGroupEspecialidadeMedico.get('especialidadeId')?.touched"
+    >
+      Id do médico é obrigatório!
+    </div>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Id"
+        name="id"
+        formControlName="id"
+        [readonly]="!childmessage"
       />
     </mat-form-field>
   </form>
-  <button mat-raised-button (click)="sweetAlert()" id="button-accent">
+  <button
+    [disabled]="!formGroupEspecialidadeMedico.valid"
+    mat-raised-button
+    (click)="save()"
+    id="button-accent"
+  >
     Salvar
   </button>
   <button mat-raised-button (click)="cancel()" id="button-sec">Voltar</button>

@@ -23,11 +23,6 @@ export class MedicoService {
     });
   }
 
-  handleError(e: any): Observable<any> {
-    this.showMenssage('Erro :)', true);
-    return EMPTY;
-  }
-
   findAll(): Observable<Medico[]> {
     return this.http.get<Medico[]>(this.baseUrl);
   }
@@ -42,26 +37,17 @@ export class MedicoService {
 
   delete(id: number): Observable<Medico> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.delete<Medico>(url).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.delete<Medico>(url);
   }
 
   update(medico: Medico): Observable<Medico> {
     // const url = `${this.baseUrl}/${especialidade.id}`;
     const url = `${this.baseUrl}/`;
-    return this.http.put<Medico>(url, medico).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.put<Medico>(url, medico);
   }
 
   readById(id: string): Observable<Medico> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.get<Medico>(url).pipe(
-      map((obj) => obj),
-      catchError((e) => this.handleError(e))
-    );
+    return this.http.get<Medico>(url);
   }
 }

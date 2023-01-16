@@ -1,4 +1,4 @@
-export interface EspecialidadeMedico {
+export class EspecialidadeMedico {
   id?: number;
   medicoId: number;
   especialidadeId: number;

@@ -131,7 +131,7 @@ export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/especialidadeMedico/form']);
   }
 
-  sweetAlert(id: number) {
+  save(id: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -165,8 +165,8 @@ export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
           this.router.navigate(['/especialidadeMedico']);
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire(
-            'Operação cancelada',
-            'Especialidade ativa :)',
+            'Cancelada',
+            'Operação cancelada com sucesso :)',
             'error'
           );
           this.router.navigate(['/especialidadeMedico']);

@@ -60,7 +60,7 @@ export class ClienteFormComponent {
     ];
   }
 
-  sweetAlert() {
+  save() {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -117,20 +117,29 @@ export class ClienteFormComponent {
   }
 
   ngOnInit(): void {
+    const swalWithBootstrapButtons = Swal.mixin({
+      buttonsStyling: false,
+    });
     this.sexoOption = this.getSexo();
     this.createForm(new Cliente());
     if (!!this.route.snapshot.paramMap.get('id')) {
       const id = this.route.snapshot.paramMap.get('id');
-      this.clienteService.readById(id).subscribe((cliente) => {
-        this.cliente = cliente;
-        this.formGroupCliente.patchValue(cliente);
-        this.cliente.telefones.map((telefone) =>
-          this.adicionarTelefone(telefone.numeroTelefone)
-        );
-        this.cliente.emails.map((email) =>
-          this.adicionarEmail(email.enderecoEmail)
-        );
-      });
+      this.clienteService.readById(id).subscribe(
+        (cliente) => {
+          this.cliente = cliente;
+          this.formGroupCliente.patchValue(cliente);
+          this.cliente.telefones.map((telefone) =>
+            this.adicionarTelefone(telefone.numeroTelefone)
+          );
+          this.cliente.emails.map((email) =>
+            this.adicionarEmail(email.enderecoEmail)
+          );
+        },
+        (error) => {
+          swalWithBootstrapButtons.fire('Erro!', error.error, 'error');
+          this.router.navigate(['/cliente']);
+        }
+      );
     }
   }
 

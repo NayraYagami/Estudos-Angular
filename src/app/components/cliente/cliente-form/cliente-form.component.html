@@ -207,7 +207,12 @@
       Adicionar
     </button>
   </form>
-  <button mat-raised-button (click)="sweetAlert()" id="button-accent">
+  <button
+    [disabled]="!formGroupCliente.valid"
+    mat-raised-button
+    (click)="save()"
+    id="button-accent"
+  >
     Salvar
   </button>
   <button mat-raised-button (click)="cancel()" id="button-sec">Voltar</button>

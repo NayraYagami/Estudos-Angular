@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { EspecialidadeMedicoService } from './../../especialidade-medico.service';
@@ -10,17 +11,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./especialidade-medico-form.component.css'],
 })
 export class EspecialidadeMedicoFormComponent implements OnInit {
-  especialidadeMedico: EspecialidadeMedico = {
-    medicoId: null,
-    especialidadeId: null,
-  };
-
   constructor(
     private especialidadeMedicoService: EspecialidadeMedicoService,
+    private formBuilder: FormBuilder,
     private router: Router
   ) {}
 
-  sweetAlert() {
+  formGroupEspecialidadeMedico: FormGroup;
+  especialidadeMedico: EspecialidadeMedico;
+  childmessage = false;
+
+  createForm(especialidadeMedico: EspecialidadeMedico) {
+    this.formGroupEspecialidadeMedico = this.formBuilder.group({
+      medicoId: ['', [Validators.required]],
+      especialidadeId: ['', [Validators.required]],
+      id: [''],
+    });
+  }
+
+  save() {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -42,7 +51,7 @@ export class EspecialidadeMedicoFormComponent implements OnInit {
       .then((result) => {
         if (result.isConfirmed) {
           this.especialidadeMedicoService
-            .create(this.especialidadeMedico)
+            .create(this.formGroupEspecialidadeMedico.value)
             .subscribe(
               () => {
                 swalWithBootstrapButtons.fire(
@@ -62,17 +71,8 @@ export class EspecialidadeMedicoFormComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
-
-  createEspecialidadeMedico(): void {
-    this.especialidadeMedicoService
-      .create(this.especialidadeMedico)
-      .subscribe(() => {
-        this.especialidadeMedicoService.showMenssage(
-          'Operação executada com sucesso!'
-        );
-        this.router.navigate(['/especialidadeMedico']);
-      });
+  ngOnInit(): void {
+    this.createForm(new EspecialidadeMedico());
   }
 
   cancel(): void {
