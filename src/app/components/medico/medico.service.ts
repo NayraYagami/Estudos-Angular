@@ -1,3 +1,4 @@
+import { ListResponse } from './../agendamentos/agendamentos.model';
 import { map, catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
@@ -23,16 +24,13 @@ export class MedicoService {
     });
   }
 
-  findAll(): Observable<Medico[]> {
-    return this.http.get<Medico[]>(this.baseUrl);
-  }
-
   create(medico: Medico): Observable<Medico> {
     return this.http.post<Medico>(this.baseUrl, medico);
   }
 
-  read(medicoSearch: MedicoSearch): Observable<MedicoSearch[]> {
-    return this.http.post<MedicoSearch[]>(this.baseUrlSearch, medicoSearch);
+  read(medicoSearch: MedicoSearch): Observable<ListResponse<MedicoSearch>> {
+    const urlSearch = `${this.baseUrl}/search/`;
+    return this.http.post<ListResponse<MedicoSearch>>(urlSearch, medicoSearch);
   }
 
   delete(id: number): Observable<Medico> {

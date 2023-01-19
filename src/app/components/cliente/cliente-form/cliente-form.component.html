@@ -35,6 +35,7 @@
         <label for="dataNascimento">Data de nascimento:</label>
         <input
           matInput
+          type="datetime-local"
           class="form-control"
           name="dataNascimento"
           id="dataNascimento"
@@ -117,7 +118,7 @@
         class="validation-message"
         *ngIf="formGroupCliente.get('pessoa.sexo')?.errors?.['required']"
       >
-        Sexo é obrigatório!
+        É necessário informar o sexo!
       </div>
     </div>
 
@@ -137,6 +138,7 @@
         <label for="dataCriacao">Data de Criação:</label>
         <input
           matInput
+          type="datetime-local"
           class="form-control"
           name="dataCriacao"
           id="dataCriacao"
@@ -155,6 +157,7 @@
         <label for="dataExclusao">Data de Exclusão:</label>
         <input
           matInput
+          type="datetime-local"
           class="form-control"
           name="dataExclusao"
           id="dataExclusao"
@@ -169,7 +172,13 @@
           *ngFor="let item of telefones.controls; let indiceTelefone = index"
         >
           <div [formGroupName]="indiceTelefone">
-            <input formControlName="numeroTelefone" />
+            <mat-form-field>
+              <input
+                matInput
+                formControlName="numeroTelefone"
+                [readonly]="!childmessage"
+              />
+            </mat-form-field>
           </div>
         </ng-container>
 
@@ -191,16 +200,38 @@
           *ngFor="let item of emails.controls; let indiceEmail = index"
         >
           <div [formGroupName]="indiceEmail">
-            <input formControlName="enderecoEmail" />
+            <mat-form-field>
+              <input
+                #input
+                matInput
+                type="text"
+                formControlName="enderecoEmail"
+                email
+              />
+            </mat-form-field>
           </div>
         </ng-container>
 
         <ng-container *ngIf="emails.controls.length === 0"> </ng-container>
       </div>
     </div>
+    <div
+      class="validation-message"
+      *ngIf="formGroupCliente.get('emailInput')?.errors?.['email'] && formGroupCliente.get('emailInput')?.touched"
+    >
+      Email inválido!
+    </div>
 
     <mat-form-field>
-      <input #inputEmail matInput type="text" placeholder="Email" />
+      <input
+        type="email"
+        #inputEmail
+        email
+        formControlName="emailInput"
+        matInput
+        type="text"
+        placeholder="Email"
+      />
     </mat-form-field>
 
     <button mat-raised-button (click)="adicionarEmail(inputEmail.value)">

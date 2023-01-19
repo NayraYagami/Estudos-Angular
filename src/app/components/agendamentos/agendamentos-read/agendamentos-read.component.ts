@@ -1,11 +1,9 @@
-import { MatTable } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Agendamentos, AgendamentosSearch } from './../agendamentos.model';
 import { AgendamentosService } from './../agendamentos.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,10 +12,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./agendamentos-read.component.css'],
 })
 export class AgendamentosReadComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<Agendamentos>;
-
   constructor(
     private agendamentosService: AgendamentosService,
     private router: Router,
@@ -27,8 +21,26 @@ export class AgendamentosReadComponent implements OnInit {
 
   ativoOption: any[];
 
+  pageSize = [5, 10, 25, 100];
+  length = 0;
+
   public formGroupAgendamentos: FormGroup;
   agendamentosSearch: AgendamentosSearch[];
+  pageEvent: PageEvent;
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.formGroupAgendamentos.value.pageSize = e.pageSize;
+    this.formGroupAgendamentos.value.page = e.pageIndex + 1;
+    this.search();
+  }
+
+  setPageSize(inputPageSize: string) {
+    if (inputPageSize) {
+      this.pageSize = inputPageSize.split(',').map((str) => +str);
+    }
+  }
 
   displayedColumns = [
     'nomeCliente',
@@ -42,24 +54,27 @@ export class AgendamentosReadComponent implements OnInit {
     'actions',
   ];
 
-  agendamentoSearch: AgendamentosSearch = {
-    nomeMedico: '',
-    nomeCliente: '',
-    dataAberturaInicio: '',
-    dataAberturaFim: '',
-    dataAtendimentoInicio: '',
-    dataAtendimentoFim: '',
-    valorConsultaMaximo: null,
-    valorConsultaMinimo: null,
-    ativo: null,
-  };
+  // agendamentoSearch: AgendamentosSearch = {
+  //   nomeMedico: '',
+  //   nomeCliente: '',
+  //   dataAberturaInicio: '',
+  //   dataAberturaFim: '',
+  //   dataAtendimentoInicio: '',
+  //   dataAtendimentoFim: '',
+  //   valorConsultaMaximo: null,
+  //   valorConsultaMinimo: null,
+  //   ativo: null,
+  //   page: null,
+  //   pageSize: null,
+  // };
 
   search() {
     this.agendamentosService
       .read(this.formGroupAgendamentos.value)
-      .subscribe((agendamentosSearch) => {
-        this.agendamentosSearch = agendamentosSearch;
-        console.log(agendamentosSearch);
+      .subscribe((search) => {
+        this.agendamentosSearch = search.list;
+        this.length = search.total;
+        console.log(search.list);
       });
   }
 
@@ -85,6 +100,8 @@ export class AgendamentosReadComponent implements OnInit {
       valorConsultaMaximo: null,
       valorConsultaMinimo: null,
       ativo: null,
+      page: 1,
+      pageSize: 5,
     });
   }
 
@@ -135,6 +152,7 @@ export class AgendamentosReadComponent implements OnInit {
 
   ngOnInit(): void {
     this.ativoOption = this.getAtivo();
-    this.createForm(this.agendamentoSearch);
+    this.createForm(new AgendamentosSearch());
+    this.search();
   }
 }

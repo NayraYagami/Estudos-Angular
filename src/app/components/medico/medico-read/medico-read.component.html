@@ -33,6 +33,7 @@
         <label for="dataCriacaoInicio">Data de Criação Inicio:</label>
         <input
           matInput
+          type="datetime-local"
           class="form-control"
           name="dataCriacaoInicio"
           id="dataCriacaoInicio"
@@ -44,6 +45,7 @@
         <label for="dataCriacaoFim">Data de Criação Fim:</label>
         <input
           matInput
+          type="datetime-local"
           class="form-control"
           name="dataCriacaoFim"
           id="dataCriacaoFim"
@@ -127,12 +129,16 @@
 
     <ng-container matColumnDef="dataCriacaoInicio">
       <th mat-header-cell *matHeaderCellDef>Data Criação:</th>
-      <td mat-cell *matCellDef="let row">{{ row.dataCriacaoInicio }}</td>
+      <td mat-cell *matCellDef="let row">
+        {{ row.dataCriacaoInicio | date : "dd/MM/yyyy HH:mm" }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="dataCriacaoFim">
       <th mat-header-cell *matHeaderCellDef>Data Exclusão:</th>
-      <td mat-cell *matCellDef="let row">{{ row.dataCriacaoFim }}</td>
+      <td mat-cell *matCellDef="let row">
+        {{ row.dataCriacaoFim | date : "dd/MM/yyyy HH:mm" }}
+      </td>
     </ng-container>
 
     <!-- Action Column -->
@@ -154,4 +160,13 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <mat-paginator
+    [length]="length"
+    [pageSize]="formGroupMedico.value.pageSize"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="handlePageEvent($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
 </div>

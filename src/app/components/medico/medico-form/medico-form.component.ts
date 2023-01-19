@@ -28,7 +28,7 @@ export class MedicoFormComponent implements OnInit {
     this.formGroupMedico = this.formBuilder.group({
       pessoa: this.formBuilder.group({
         id: [''],
-        dataNascimento: ['2000-06-12T11:52:28.397', [Validators.required]],
+        dataNascimento: ['', [Validators.required]],
         sexo: ['', [Validators.required]],
         cpf: ['', [Validators.required]],
         peso: ['', [Validators.required]],
@@ -36,7 +36,7 @@ export class MedicoFormComponent implements OnInit {
         nome: ['', [Validators.required]],
       }),
       id: [''],
-      dataCriacao: ['2000-06-12T11:52:28.397', [Validators.required]],
+      dataCriacao: ['', [Validators.required]],
       dataExclusao: [''],
       crm: ['', [Validators.required]],
     });

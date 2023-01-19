@@ -1,3 +1,4 @@
+import { PageEvent } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,8 +19,26 @@ export class ClienteReadComponent implements OnInit {
   ) {}
 
   ativoOption: any[];
-
+  public formGroupCliente: FormGroup;
+  cliente: ClienteSearch;
   sexoOption: any[];
+  pageSize = [5, 10, 25, 100];
+  length = 0;
+  pageEvent: PageEvent;
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.formGroupCliente.value.pageSize = e.pageSize;
+    this.formGroupCliente.value.page = e.pageIndex + 1;
+    this.search();
+  }
+
+  setPageSize(inputPageSize: string) {
+    if (inputPageSize) {
+      this.pageSize = inputPageSize.split(',').map((str) => +str);
+    }
+  }
 
   getSexo() {
     return [
@@ -40,32 +59,29 @@ export class ClienteReadComponent implements OnInit {
     'actions',
   ];
 
-  clienteSearch: ClienteSearch = {
-    idCliente: null,
-    nomeCliente: '',
-    numeroTelefone: '',
-    dataCriacaoInicio: '',
-    dataCriacaoFim: '',
-    ativo: null,
-    cpf: '',
-    emailCliente: '',
-    sexo: null,
-  };
+  // clienteSearch: ClienteSearch = {
+  //   idCliente: null,
+  //   nomeCliente: '',
+  //   numeroTelefone: '',
+  //   dataCriacaoInicio: '',
+  //   dataCriacaoFim: '',
+  //   ativo: null,
+  //   cpf: '',
+  //   emailCliente: '',
+  //   sexo: null,
+  // };
 
   clientesSearch: ClienteSearch[];
 
   search() {
     this.clienteService
       .read(this.formGroupCliente.value)
-      .subscribe((clientesSearch) => {
-        this.clientesSearch = clientesSearch;
-        console.log(clientesSearch);
+      .subscribe((search) => {
+        this.clientesSearch = search.list;
+        this.length = search.total;
+        console.log(search.list);
       });
   }
-
-  public formGroupCliente: FormGroup;
-
-  cliente: ClienteSearch;
 
   createForm(cliente: ClienteSearch) {
     this.formGroupCliente = this.formBuilder.group({
@@ -78,6 +94,8 @@ export class ClienteReadComponent implements OnInit {
       cpf: [''],
       emailCliente: [''],
       sexo: [null],
+      page: 1,
+      pageSize: 5,
     });
   }
 
@@ -141,6 +159,7 @@ export class ClienteReadComponent implements OnInit {
   ngOnInit(): void {
     this.sexoOption = this.getSexo();
     this.ativoOption = this.getAtivo();
-    this.createForm(this.clienteSearch);
+    this.createForm(new ClienteSearch());
+    this.search();
   }
 }

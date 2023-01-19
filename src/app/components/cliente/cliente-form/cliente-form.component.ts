@@ -29,7 +29,7 @@ export class ClienteFormComponent {
     this.formGroupCliente = this.formBuilder.group({
       pessoa: this.formBuilder.group({
         id: [''],
-        dataNascimento: ['2000-06-12T11:52:28.397', [Validators.required]],
+        dataNascimento: ['', [Validators.required]],
         sexo: ['', [Validators.required]],
         cpf: ['', [Validators.required]],
         peso: ['', [Validators.required]],
@@ -37,9 +37,10 @@ export class ClienteFormComponent {
         nome: ['', [Validators.required]],
       }),
       id: [''],
+      emailInput: [''],
       telefones: this.formBuilder.array([]),
       emails: this.formBuilder.array([]),
-      dataCriacao: ['2000-06-12T11:52:28.397', [Validators.required]],
+      dataCriacao: ['', [Validators.required]],
       dataExclusao: [''],
     });
   }

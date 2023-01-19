@@ -31,8 +31,8 @@ export class AgendamentosFormComponent implements OnInit {
   createForm(agendamentos: Agendamentos) {
     this.formGroupAgendamentos = this.formBuilder.group({
       id: [''],
-      dataAbertura: ['2000-06-12T11:52:28.397', [Validators.required]],
-      dataConsulta: ['2023-06-12T11:52:28.397', [Validators.required]],
+      dataAbertura: [null, [Validators.required]],
+      dataConsulta: [null, [Validators.required]],
       dataCancelamento: [''],
       valorConsulta: ['', [Validators.required]],
       cliente: this.formBuilder.group({

@@ -16,21 +16,12 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
   templateUrl: './especialidade-medico-read.component.html',
   styleUrls: ['./especialidade-medico-read.component.css'],
 })
-export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<EspecialidadeMedico>;
-
-  especialidadesMedico: EspecialidadeMedico[] = [];
-  dataSource = new MatTableDataSource<EspecialidadeMedico>(
-    this.especialidadesMedico
-  );
-
+export class EspecialidadeMedicoReadComponent implements OnInit {
+  length = 0;
+  pageSize = [5, 10, 25];
+  especialidadesMedicoSearch: EspecialidadeMedicoSearch[];
   pageEvent: PageEvent;
-  length = 50;
-  pageSize = 10;
-  pageIndex = 0;
-  pageSizeOptions = [5, 10, 25];
+  public formGroupEspecialidadeMedico: FormGroup;
 
   constructor(
     private especialidadeMedicoService: EspecialidadeMedicoService,
@@ -39,23 +30,8 @@ export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.createForm(this.especialidadeMedicoSearch);
-  }
-
-  ngAfterViewInit(): void {
-    this.findAll();
-  }
-
-  findAll(): void {
-    this.especialidadeMedicoService
-      .findAll(this.especialidadeMedicoSearch)
-      .subscribe((resposta) => {
-        this.especialidadesMedico = resposta;
-        this.dataSource = new MatTableDataSource<EspecialidadeMedico>(
-          this.especialidadesMedico
-        );
-        this.dataSource.paginator = this.paginator;
-      });
+    this.createForm(new EspecialidadeMedicoSearch());
+    this.search();
   }
 
   displayedColumns = [
@@ -67,19 +43,27 @@ export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
     'action',
   ];
 
-  especialidadeMedicoSearch: EspecialidadeMedicoSearch = {
-    idsEspecialidade: [],
-    idsMedico: [],
-  };
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.formGroupEspecialidadeMedico.value.pageSize = e.pageSize;
+    this.formGroupEspecialidadeMedico.value.page = e.pageIndex + 1;
+    this.search();
+  }
 
-  especialidadesMedicoSearch: EspecialidadeMedicoSearch[];
+  setPageSize(inputPageSize: string) {
+    if (inputPageSize) {
+      this.pageSize = inputPageSize.split(',').map((str) => +str);
+    }
+  }
 
   search(): void {
-    console.log(this.formGroupEspecialidadeMedico.value);
     this.especialidadeMedicoService
       .read(this.getFilter())
-      .subscribe((especialidadesMedicoSearch) => {
-        this.especialidadesMedicoSearch = especialidadesMedicoSearch;
+      .subscribe((search) => {
+        this.especialidadesMedicoSearch = search.list;
+        this.length = search.total;
+        console.log(search.list);
       });
   }
 
@@ -89,6 +73,8 @@ export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
     filter.idsEspecialidade = new Array<number>();
     let idEspecialidadeInput =
       this.formGroupEspecialidadeMedico.get('idsEspecialidade').value;
+    let page = this.formGroupEspecialidadeMedico.get('page').value;
+    let pageSize = this.formGroupEspecialidadeMedico.get('pageSize').value;
     let idMedicoInput =
       this.formGroupEspecialidadeMedico.get('idsMedico').value;
     if (!!idMedicoInput) {
@@ -115,15 +101,17 @@ export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
       }
     }
     console.log(filter);
+    filter.page = page;
+    filter.pageSize = pageSize;
     return filter;
   }
-
-  public formGroupEspecialidadeMedico: FormGroup;
 
   createForm(especialidadeMedico: EspecialidadeMedicoSearch) {
     this.formGroupEspecialidadeMedico = this.formBuilder.group({
       idsEspecialidade: [null],
       idsMedico: [null],
+      page: 1,
+      pageSize: 5,
     });
   }
 
@@ -173,19 +161,4 @@ export class EspecialidadeMedicoReadComponent implements OnInit, AfterViewInit {
         }
       });
   }
-
-  // handlePageEvent(e: PageEvent) {
-  //   this.pageEvent = e;
-  //   this.length = e.length;
-  //   this.pageSize = e.pageSize;
-  //   this.pageIndex = e.pageIndex;
-  // }
-
-  // setPageSizeOptions(setPageSizeOptionsInput: string) {
-  //   if (setPageSizeOptionsInput) {
-  //     this.pageSizeOptions = setPageSizeOptionsInput
-  //       .split(',')
-  //       .map((str) => +str);
-  //   }
-  // }
 }

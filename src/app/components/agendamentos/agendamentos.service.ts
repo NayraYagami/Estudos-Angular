@@ -1,5 +1,8 @@
-import { Agendamentos, AgendamentosSearch } from './agendamentos.model';
-import { map, catchError } from 'rxjs/operators';
+import {
+  ListResponse,
+  Agendamentos,
+  AgendamentosSearch,
+} from './agendamentos.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
 import { Observable, EMPTY } from 'rxjs';
@@ -12,8 +15,6 @@ export class AgendamentosService {
   constructor(private snackbar: MatSnackBar, private http: HttpClient) {}
 
   baseUrl = 'http://localhost:8080/agendamentos/api/agendamentos';
-  baseUrlSearch = 'http://localhost:8080/agendamentos/api/agendamentos/search';
-
   showMenssage(msg: string, isError: boolean = false): void {
     this.snackbar.open(msg, 'X', {
       duration: 3000,
@@ -32,15 +33,12 @@ export class AgendamentosService {
     return this.http.post<Agendamentos>(this.baseUrl, agendamento);
   }
 
-  findAll(): Observable<Agendamentos[]> {
-    return this.http.get<Agendamentos[]>(this.baseUrl);
-  }
-
   read(
     agendamentosSearch: AgendamentosSearch
-  ): Observable<AgendamentosSearch[]> {
-    return this.http.post<AgendamentosSearch[]>(
-      this.baseUrlSearch,
+  ): Observable<ListResponse<AgendamentosSearch>> {
+    const urlSearch = `${this.baseUrl}/search/`;
+    return this.http.post<ListResponse<AgendamentosSearch>>(
+      urlSearch,
       agendamentosSearch
     );
   }

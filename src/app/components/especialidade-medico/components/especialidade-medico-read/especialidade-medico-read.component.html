@@ -36,7 +36,7 @@
 </mat-card>
 
 <div class="mat-elevation-z4">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="especialidadesMedicoSearch">
     <!-- Id Column -->
     <ng-container matColumnDef="idEspecialidade">
       <th mat-header-cell *matHeaderCellDef>Id Especialidade:</th>
@@ -86,12 +86,11 @@
   </table>
 
   <mat-paginator
-    #paginator
-    [length]="dataSource?.data?.length"
-    [pageIndex]="0"
-    [pageSize]="5"
-    [pageSizeOptions]="[5, 10, 20, 50]"
+    [length]="length"
+    [pageSize]="formGroupEspecialidadeMedico.value.pageSize"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="handlePageEvent($event)"
     aria-label="Select page"
-  >
+    > 
   </mat-paginator>
 </div>

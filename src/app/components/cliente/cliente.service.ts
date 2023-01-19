@@ -1,3 +1,4 @@
+import { ListResponse } from './../agendamentos/agendamentos.model';
 import { map, catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
@@ -10,12 +11,14 @@ import { Injectable } from '@angular/core';
 })
 export class ClienteService {
   baseUrl = 'http://localhost:8080/agendamentos/api/cliente';
-  baseUrlSearch = 'http://localhost:8080/agendamentos/api/cliente/search';
-
   constructor(private snackbar: MatSnackBar, private http: HttpClient) {}
 
-  read(clienteSearch: ClienteSearch): Observable<ClienteSearch[]> {
-    return this.http.post<ClienteSearch[]>(this.baseUrlSearch, clienteSearch);
+  read(clienteSearch: ClienteSearch): Observable<ListResponse<ClienteSearch>> {
+    const urlSearch = `${this.baseUrl}/search/`;
+    return this.http.post<ListResponse<ClienteSearch>>(
+      urlSearch,
+      clienteSearch
+    );
   }
 
   showMenssage(msg: string, isError: boolean = false): void {

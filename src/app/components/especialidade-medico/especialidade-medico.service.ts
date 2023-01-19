@@ -1,3 +1,4 @@
+import { ListResponse } from './../agendamentos/agendamentos.model';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, EMPTY } from 'rxjs';
 import {
@@ -13,8 +14,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EspecialidadeMedicoService {
   baseUrl = 'http://localhost:8080/agendamentos/api/especialidade-medico';
-  baseUrlSearch =
-    'http://localhost:8080/agendamentos/api/especialidade-medico/search';
 
   constructor(private snackbar: MatSnackBar, private http: HttpClient) {}
 
@@ -38,18 +37,10 @@ export class EspecialidadeMedicoService {
 
   read(
     especialidadeMedicoSearch: EspecialidadeMedicoSearch
-  ): Observable<EspecialidadeMedicoSearch[]> {
-    return this.http.post<EspecialidadeMedicoSearch[]>(
-      this.baseUrlSearch,
-      especialidadeMedicoSearch
-    );
-  }
-
-  findAll(
-    especialidadeMedicoSearch: EspecialidadeMedicoSearch
-  ): Observable<EspecialidadeMedico[]> {
-    return this.http.post<EspecialidadeMedico[]>(
-      this.baseUrlSearch,
+  ): Observable<ListResponse<EspecialidadeMedicoSearch>> {
+    const urlSearch = `${this.baseUrl}/search/`;
+    return this.http.post<ListResponse<EspecialidadeMedicoSearch>>(
+      urlSearch,
       especialidadeMedicoSearch
     );
   }

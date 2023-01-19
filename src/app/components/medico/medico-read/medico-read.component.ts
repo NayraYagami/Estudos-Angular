@@ -1,3 +1,4 @@
+import { PageEvent } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -17,8 +18,27 @@ export class MedicoReadComponent implements OnInit {
     private router: Router
   ) {}
 
+  pageSize = [5, 10, 25, 100];
+  length = 0;
   sexoOption: any[];
   ativoOption: any[];
+  medicosSearch: MedicoSearch[];
+  public formGroupMedico: FormGroup;
+  pageEvent: PageEvent;
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.formGroupMedico.value.pageSize = e.pageSize;
+    this.formGroupMedico.value.page = e.pageIndex + 1;
+    this.search();
+  }
+
+  setPageSize(inputPageSize: string) {
+    if (inputPageSize) {
+      this.pageSize = inputPageSize.split(',').map((str) => +str);
+    }
+  }
 
   getSexo() {
     return [
@@ -90,26 +110,22 @@ export class MedicoReadComponent implements OnInit {
       });
   }
 
-  medicoSearch: MedicoSearch = {
-    idMedico: null,
-    nomeMedico: '',
-    cpf: '',
-    dataCriacaoInicio: '',
-    dataCriacaoFim: '',
-    ativo: null,
-    sexo: null,
-    idsEspecialidadeMedico: null,
-  };
-
-  medicosSearch: MedicoSearch[];
-
-  public formGroupMedico: FormGroup;
+  // medicoSearch: MedicoSearch = {
+  //   idMedico: null,
+  //   nomeMedico: '',
+  //   cpf: '',
+  //   dataCriacaoInicio: '',
+  //   dataCriacaoFim: '',
+  //   ativo: null,
+  //   sexo: null,
+  //   idsEspecialidadeMedico: null,
+  // };
 
   search() {
-    console.log(this.formGroupMedico.value);
-    this.medicoService.read(this.getFilter()).subscribe((medicosSearch) => {
-      this.medicosSearch = medicosSearch;
-      console.log(medicosSearch);
+    this.medicoService.read(this.getFilter()).subscribe((search) => {
+      this.medicosSearch = search.list;
+      this.length = search.total;
+      console.log(search.list);
     });
   }
 
@@ -123,13 +139,16 @@ export class MedicoReadComponent implements OnInit {
       ativo: [''],
       sexo: [null],
       idsEspecialidadeMedico: [null],
+      page: 1,
+      pageSize: 5,
     });
   }
 
   private getFilter(): MedicoSearch {
     let filter: MedicoSearch = new MedicoSearch();
     filter.idsEspecialidadeMedico = new Array<number>();
-
+    let pageSize = this.formGroupMedico.get('pageSize').value;
+    let page = this.formGroupMedico.get('page').value;
     let nomeMedico = this.formGroupMedico.get('nomeMedico').value;
     let cpf = this.formGroupMedico.get('cpf').value;
     let idMedico = this.formGroupMedico.get('idMedico').value;
@@ -165,6 +184,8 @@ export class MedicoReadComponent implements OnInit {
     filter.dataCriacaoFim = dataCriacaoFim;
     filter.ativo = ativo;
     filter.sexo = sexo;
+    filter.pageSize = pageSize;
+    filter.page = page;
 
     return filter;
   }
@@ -176,6 +197,7 @@ export class MedicoReadComponent implements OnInit {
   ngOnInit(): void {
     this.ativoOption = this.getAtivo();
     this.sexoOption = this.getSexo();
-    this.createForm(this.medicoSearch);
+    this.createForm(new MedicoSearch());
+    this.search();
   }
 }

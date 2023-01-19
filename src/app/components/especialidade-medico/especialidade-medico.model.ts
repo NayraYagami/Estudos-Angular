@@ -7,4 +7,11 @@ export class EspecialidadeMedico {
 export class EspecialidadeMedicoSearch {
   idsEspecialidade: number[];
   idsMedico: number[];
+  page?: number;
+  pageSize?: number;
+}
+
+export interface ListResponse<T> {
+  list: Array<T>;
+  total: number;
 }
