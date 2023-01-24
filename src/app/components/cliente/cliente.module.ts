@@ -1,3 +1,4 @@
+import { NgxMaskPipe, NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ClienteRoutingModule } from './cliente.routing.module';
 import { ClienteReadComponent } from './cliente-read/cliente-read.component';
 import { ClienteCrudComponent } from './../../views/cliente-crud/cliente-crud.component';
@@ -39,6 +40,8 @@ import { ClienteFormComponent } from './cliente-form/cliente-form.component';
     MatSortModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    NgxMaskPipe,
+    NgxMaskDirective,
   ],
   exports: [],
   declarations: [
@@ -46,6 +49,6 @@ import { ClienteFormComponent } from './cliente-form/cliente-form.component';
     ClienteReadComponent,
     ClienteFormComponent,
   ],
-  providers: [],
+  providers: [provideNgxMask()],
 })
 export class ClienteModule {}

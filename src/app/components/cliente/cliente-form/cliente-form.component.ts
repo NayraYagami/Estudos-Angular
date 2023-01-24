@@ -67,7 +67,7 @@ export class ClienteFormComponent {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger',
       },
-      buttonsStyling: false,
+      buttonsStyling: true,
     });
 
     swalWithBootstrapButtons
@@ -119,7 +119,7 @@ export class ClienteFormComponent {
 
   ngOnInit(): void {
     const swalWithBootstrapButtons = Swal.mixin({
-      buttonsStyling: false,
+      buttonsStyling: true,
     });
     this.sexoOption = this.getSexo();
     this.createForm(new Cliente());

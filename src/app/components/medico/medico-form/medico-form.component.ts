@@ -44,7 +44,7 @@ export class MedicoFormComponent implements OnInit {
 
   ngOnInit(): void {
     const swalWithBootstrapButtons = Swal.mixin({
-      buttonsStyling: false,
+      buttonsStyling: true,
     });
     this.sexoOption = this.getSexo();
     this.createForm(new Medico());
@@ -96,7 +96,7 @@ export class MedicoFormComponent implements OnInit {
         showCancelButton: true,
         confirmButtonText: 'Enviar',
         cancelButtonText: 'Voltar',
-        reverseButtons: false,
+        reverseButtons: true,
       })
       .then((result) => {
         if (result.isConfirmed) {

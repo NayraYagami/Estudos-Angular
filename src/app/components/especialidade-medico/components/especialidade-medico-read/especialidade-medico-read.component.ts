@@ -1,12 +1,7 @@
 import Swal from 'sweetalert2';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { EspecialidadeMedicoService } from './../../especialidade-medico.service';
-import {
-  EspecialidadeMedicoSearch,
-  EspecialidadeMedico,
-} from './../../especialidade-medico.model';
+import { EspecialidadeMedicoSearch } from './../../especialidade-medico.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
@@ -43,19 +38,26 @@ export class EspecialidadeMedicoReadComponent implements OnInit {
     'action',
   ];
 
+  especialidadeMedicoSearch: EspecialidadeMedicoSearch = {
+    idsEspecialidade: null,
+    idsMedico: null,
+    page: 1,
+    pageSize: 5,
+  };
+
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.length = e.length;
-    this.formGroupEspecialidadeMedico.value.pageSize = e.pageSize;
-    this.formGroupEspecialidadeMedico.value.page = e.pageIndex + 1;
+    this.especialidadeMedicoSearch.pageSize = e.pageSize;
+    this.especialidadeMedicoSearch.page = e.pageIndex + 1;
     this.search();
   }
 
-  setPageSize(inputPageSize: string) {
-    if (inputPageSize) {
-      this.pageSize = inputPageSize.split(',').map((str) => +str);
-    }
-  }
+  // setPageSize(inputPageSize: string) {
+  //   if (inputPageSize) {
+  //     this.pageSize = inputPageSize.split(',').map((str) => +str);
+  //   }
+  // }
 
   search(): void {
     this.especialidadeMedicoService
@@ -73,8 +75,8 @@ export class EspecialidadeMedicoReadComponent implements OnInit {
     filter.idsEspecialidade = new Array<number>();
     let idEspecialidadeInput =
       this.formGroupEspecialidadeMedico.get('idsEspecialidade').value;
-    let page = this.formGroupEspecialidadeMedico.get('page').value;
-    let pageSize = this.formGroupEspecialidadeMedico.get('pageSize').value;
+    // let page = this.formGroupEspecialidadeMedico.get('page').value;
+    // let pageSize = this.formGroupEspecialidadeMedico.get('pageSize').value;
     let idMedicoInput =
       this.formGroupEspecialidadeMedico.get('idsMedico').value;
     if (!!idMedicoInput) {
@@ -84,7 +86,7 @@ export class EspecialidadeMedicoReadComponent implements OnInit {
       });
 
       if (!!idMedicoList && idMedicoList.length > 0) {
-        filter.idsMedico = idMedicoList;
+        this.especialidadeMedicoSearch.idsMedico = idMedicoList;
       }
     }
 
@@ -97,13 +99,13 @@ export class EspecialidadeMedicoReadComponent implements OnInit {
         });
 
       if (!!idEspecialidadeList && idEspecialidadeList.length > 0) {
-        filter.idsEspecialidade = idEspecialidadeList;
+        this.especialidadeMedicoSearch.idsEspecialidade = idEspecialidadeList;
       }
     }
     console.log(filter);
-    filter.page = page;
-    filter.pageSize = pageSize;
-    return filter;
+    // filter.page = page;
+    // filter.pageSize = pageSize;
+    return this.especialidadeMedicoSearch;
   }
 
   createForm(especialidadeMedico: EspecialidadeMedicoSearch) {
@@ -125,7 +127,7 @@ export class EspecialidadeMedicoReadComponent implements OnInit {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger',
       },
-      buttonsStyling: false,
+      buttonsStyling: true,
     });
 
     swalWithBootstrapButtons

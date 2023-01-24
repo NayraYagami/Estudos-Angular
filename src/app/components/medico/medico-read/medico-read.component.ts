@@ -18,7 +18,6 @@ export class MedicoReadComponent implements OnInit {
     private router: Router
   ) {}
 
-  pageSize = [5, 10, 25, 100];
   length = 0;
   sexoOption: any[];
   ativoOption: any[];
@@ -26,18 +25,40 @@ export class MedicoReadComponent implements OnInit {
   public formGroupMedico: FormGroup;
   pageEvent: PageEvent;
 
+  createForm(medico: MedicoSearch) {
+    this.formGroupMedico = this.formBuilder.group({
+      idMedico: [''],
+      nomeMedico: [''],
+      cpf: [''],
+      dataCriacaoInicio: [''],
+      dataCriacaoFim: [''],
+      ativo: [''],
+      sexo: [null],
+      idsEspecialidadeMedico: [null],
+      page: 1,
+      pageSize: 5,
+    });
+  }
+
+  medicoSearch: MedicoSearch = {
+    idMedico: null,
+    nomeMedico: '',
+    cpf: '',
+    dataCriacaoInicio: null,
+    dataCriacaoFim: null,
+    ativo: null,
+    sexo: '',
+    idsEspecialidadeMedico: null,
+    page: 1,
+    pageSize: 5,
+  };
+
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.length = e.length;
-    this.formGroupMedico.value.pageSize = e.pageSize;
-    this.formGroupMedico.value.page = e.pageIndex + 1;
+    this.medicoSearch.pageSize = e.pageSize;
+    this.medicoSearch.page = e.pageIndex + 1;
     this.search();
-  }
-
-  setPageSize(inputPageSize: string) {
-    if (inputPageSize) {
-      this.pageSize = inputPageSize.split(',').map((str) => +str);
-    }
   }
 
   getSexo() {
@@ -71,7 +92,7 @@ export class MedicoReadComponent implements OnInit {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger',
       },
-      buttonsStyling: false,
+      buttonsStyling: true,
     });
 
     swalWithBootstrapButtons
@@ -109,18 +130,6 @@ export class MedicoReadComponent implements OnInit {
         }
       });
   }
-
-  // medicoSearch: MedicoSearch = {
-  //   idMedico: null,
-  //   nomeMedico: '',
-  //   cpf: '',
-  //   dataCriacaoInicio: '',
-  //   dataCriacaoFim: '',
-  //   ativo: null,
-  //   sexo: null,
-  //   idsEspecialidadeMedico: null,
-  // };
-
   search() {
     this.medicoService.read(this.getFilter()).subscribe((search) => {
       this.medicosSearch = search.list;
@@ -129,26 +138,11 @@ export class MedicoReadComponent implements OnInit {
     });
   }
 
-  createForm(medico: MedicoSearch) {
-    this.formGroupMedico = this.formBuilder.group({
-      idMedico: [''],
-      nomeMedico: [''],
-      cpf: [''],
-      dataCriacaoInicio: [''],
-      dataCriacaoFim: [''],
-      ativo: [''],
-      sexo: [null],
-      idsEspecialidadeMedico: [null],
-      page: 1,
-      pageSize: 5,
-    });
-  }
-
-  private getFilter(): MedicoSearch {
+  public getFilter(): MedicoSearch {
     let filter: MedicoSearch = new MedicoSearch();
     filter.idsEspecialidadeMedico = new Array<number>();
-    let pageSize = this.formGroupMedico.get('pageSize').value;
-    let page = this.formGroupMedico.get('page').value;
+    // let pageSize = this.formGroupMedico.get('pageSize').value;
+    // let page = this.formGroupMedico.get('page').value;
     let nomeMedico = this.formGroupMedico.get('nomeMedico').value;
     let cpf = this.formGroupMedico.get('cpf').value;
     let idMedico = this.formGroupMedico.get('idMedico').value;
@@ -173,21 +167,21 @@ export class MedicoReadComponent implements OnInit {
         !!idsEspecialidadeMedicoList &&
         idsEspecialidadeMedicoList.length > 0
       ) {
-        filter.idsEspecialidadeMedico = idsEspecialidadeMedicoList;
+        this.medicoSearch.idsEspecialidadeMedico = idsEspecialidadeMedicoList;
       }
     }
 
-    filter.nomeMedico = nomeMedico;
-    filter.cpf = cpf;
-    filter.idMedico = idMedico;
-    filter.dataCriacaoInicio = dataCriacaoInicio;
-    filter.dataCriacaoFim = dataCriacaoFim;
-    filter.ativo = ativo;
-    filter.sexo = sexo;
-    filter.pageSize = pageSize;
-    filter.page = page;
+    this.medicoSearch.nomeMedico = nomeMedico;
+    this.medicoSearch.cpf = cpf;
+    this.medicoSearch.idMedico = idMedico;
+    this.medicoSearch.dataCriacaoInicio = dataCriacaoInicio;
+    this.medicoSearch.dataCriacaoFim = dataCriacaoFim;
+    this.medicoSearch.ativo = ativo;
+    this.medicoSearch.sexo = sexo;
+    // this.medicoSearch.pageSize = pageSize;
+    // this.medicoSearch.page = page;
 
-    return filter;
+    return this.medicoSearch;
   }
 
   navigateToMedicoForm(): void {

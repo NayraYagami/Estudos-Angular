@@ -21,15 +21,6 @@ export class ClienteService {
     );
   }
 
-  showMenssage(msg: string, isError: boolean = false): void {
-    this.snackbar.open(msg, 'X', {
-      duration: 3000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      panelClass: isError ? ['msg-error'] : ['msg-success'],
-    });
-  }
-
   create(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(this.baseUrl, cliente);
   }

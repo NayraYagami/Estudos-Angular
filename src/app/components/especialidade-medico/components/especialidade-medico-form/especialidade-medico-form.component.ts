@@ -35,7 +35,7 @@ export class EspecialidadeMedicoFormComponent implements OnInit {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger',
       },
-      buttonsStyling: false,
+      buttonsStyling: true,
     });
 
     swalWithBootstrapButtons

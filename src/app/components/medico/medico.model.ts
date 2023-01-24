@@ -16,8 +16,8 @@ export class MedicoSearch {
   ativo: boolean;
   sexo: string;
   idsEspecialidadeMedico: number[];
-  page?: number;
-  pageSize?: number;
+  page: number;
+  pageSize: number;
 }
 
 export interface ListResponse<T> {

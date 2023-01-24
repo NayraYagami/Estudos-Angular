@@ -34,6 +34,7 @@ import localePt from '@angular/common/locales/pt';
 import { registerLocaleData, CommonModule } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AgendamentoRoutingModule } from './components/agendamentos/agendamentos.routing.module';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -70,12 +71,15 @@ registerLocaleData(localePt);
     MatSortModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    NgxMaskPipe,
+    NgxMaskDirective,
   ],
   providers: [
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR',
     },
+    provideNgxMask(),
   ],
   bootstrap: [AppComponent],
 })
