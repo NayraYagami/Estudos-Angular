@@ -4,8 +4,8 @@ export class Agendamentos {
   dataConsulta: Date;
   dataCancelamento: string;
   valorConsulta: number;
-  medico: Medico;
-  cliente: Cliente;
+  medicoId: number;
+  clienteId: number;
 }
 
 export class Cliente {

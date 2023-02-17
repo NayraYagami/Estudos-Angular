@@ -78,28 +78,34 @@
       </div>
     </div>
 
-    <div formGroupName="cliente" class="cliente">
-      <mat-form-field class="form-group">
-        <label for="id">Id do cliente:</label>
-        <input matInput formControlName="id" id="id" name="id" />
-      </mat-form-field>
-    </div>
+    <mat-form-field class="form-group">
+      <label for="id">Id do cliente:</label>
+      <input
+        matInput
+        formControlName="clienteId"
+        id="clienteId"
+        name="clienteId"
+      />
+    </mat-form-field>
     <div
       class="validation-message"
-      *ngIf="formGroupAgendamentos.get('cliente.id')?.errors?.['required'] && formGroupAgendamentos.get('cliente.id')?.touched"
+      *ngIf="formGroupAgendamentos.get('clienteId')?.errors?.['required'] && formGroupAgendamentos.get('clienteId')?.touched"
     >
       Id do cliente é obrigatório!
     </div>
 
-    <div formGroupName="medico" class="medico">
-      <mat-form-field class="form-group">
-        <label for="id">Id do médico:</label>
-        <input matInput formControlName="id" id="id" name="id" />
-      </mat-form-field>
-    </div>
+    <mat-form-field class="form-group">
+      <label for="id">Id do médico:</label>
+      <input
+        matInput
+        formControlName="medicoId"
+        id="medicoId"
+        name="medicoId"
+      />
+    </mat-form-field>
     <div
       class="validation-message"
-      *ngIf="formGroupAgendamentos.get('medico.id')?.errors?.['required'] && formGroupAgendamentos.get('medico.id')?.touched"
+      *ngIf="formGroupAgendamentos.get('medicoId')?.errors?.['required'] && formGroupAgendamentos.get('medicoId')?.touched"
     >
       Id do médico é obrigatório!
     </div>

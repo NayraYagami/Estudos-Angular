@@ -34,3 +34,8 @@ table {
 #buttonDelete {
   color: #753f65;
 }
+
+.row {
+  margin-block-end: 30px;
+  margin-inline: 1rem;
+}

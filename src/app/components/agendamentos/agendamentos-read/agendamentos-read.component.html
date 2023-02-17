@@ -2,102 +2,107 @@
   <mat-card-title>Filtros:</mat-card-title>
   <form [formGroup]="formGroupAgendamentos">
     <div class="informacoes-agendamentos">
-      <mat-form-field class="form-group">
-        <label for="idCliente">Nome Cliente:</label>
-        <input matInput formControlName="nomeCliente" name="nomeCliente" />
-      </mat-form-field>
+      <div class="campos">
+        <mat-form-field class="form-group">
+          <label for="idCliente">Nome Cliente:</label>
+          <input matInput formControlName="nomeCliente" name="nomeCliente" />
+        </mat-form-field>
 
-      <mat-form-field class="form-group">
-        <label for="nomeMedico">Nome Médico:</label>
-        <input
-          matInput
-          class="form-control"
-          name="nomeMedico"
-          id="nomeMedico"
-          formControlName="nomeMedico"
-        />
-      </mat-form-field>
-
-      <mat-form-field class="form-group">
-        <label for="dataAberturaInicio">Data Abertura Início:</label>
-        <input
-          matInput
-          type="datetime-local"
-          class="form-control"
-          name="dataAberturaInicio"
-          id="dataAberturaInicio"
-          formControlName="dataAberturaInicio"
-        />
-      </mat-form-field>
-
-      <mat-form-field class="form-group">
-        <label for="dataAberturaFim">Data Abertura Fim:</label>
-        <input
-          matInput
-          class="form-control"
-          name="dataAberturaFim"
-          id="dataAberturaFim"
-          formControlName="dataAberturaFim"
-        />
-      </mat-form-field>
-
-      <mat-form-field class="form-group">
-        <label for="dataAtendimentoInicio">Data Atendimento Início:</label>
-        <input
-          matInput
-          class="form-control"
-          name="dataAtendimentoInicio"
-          id="dataAtendimentoInicio"
-          formControlName="dataAtendimentoInicio"
-        />
-      </mat-form-field>
-
-      <mat-form-field class="form-group">
-        <label for="dataAtendimentoFim">Data Atendimento Fim:</label>
-        <input
-          matInput
-          class="form-control"
-          name="dataAtendimentoFim"
-          id="dataAtendimentoFim"
-          formControlName="dataAtendimentoFim"
-        />
-      </mat-form-field>
-
-      <mat-form-field class="form-group">
-        <label for="valorConsultaMaximo">Valor Máximo:</label>
-        <input
-          matInput
-          class="form-control"
-          name="valorConsultaMaximo"
-          id="valorConsultaMaximo"
-          formControlName="valorConsultaMaximo"
-        />
-      </mat-form-field>
-
-      <mat-form-field class="form-group">
-        <label for="valorConsultaMinimo">Valor Mínimo:</label>
-        <input
-          matInput
-          class="form-control"
-          name="valorConsultaMinimo"
-          id="valorConsultaMinimo"
-          formControlName="valorConsultaMinimo"
-        />
-      </mat-form-field>
-
-      <div id="ativo" class="row">
-        <label class="radio-inline">Situação:</label>
-        <div *ngFor="let item of ativoOption">
-          <label class="radio-inline"></label>
+        <mat-form-field class="form-group">
+          <label for="nomeMedico">Nome Médico:</label>
           <input
-            type="radio"
-            [value]="item.value"
+            matInput
             class="form-control"
-            name="ativo"
-            id="ativo"
-            formControlName="ativo"
+            name="nomeMedico"
+            id="nomeMedico"
+            formControlName="nomeMedico"
           />
-          {{ item.desc }}
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <label for="dataAberturaInicio">Data Abertura Início:</label>
+          <input
+            matInput
+            type="datetime-local"
+            class="form-control"
+            name="dataAberturaInicio"
+            id="dataAberturaInicio"
+            formControlName="dataAberturaInicio"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <label for="dataAberturaFim">Data Abertura Fim:</label>
+          <input
+            matInput
+            type="datetime-local"
+            class="form-control"
+            name="dataAberturaFim"
+            id="dataAberturaFim"
+            formControlName="dataAberturaFim"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <label for="dataAtendimentoInicio">Data Atendimento Início:</label>
+          <input
+            matInput
+            class="form-control"
+            type="datetime-local"
+            name="dataAtendimentoInicio"
+            id="dataAtendimentoInicio"
+            formControlName="dataAtendimentoInicio"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <label for="dataAtendimentoFim">Data Atendimento Fim:</label>
+          <input
+            matInput
+            type="datetime-local"
+            class="form-control"
+            name="dataAtendimentoFim"
+            id="dataAtendimentoFim"
+            formControlName="dataAtendimentoFim"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <label for="valorConsultaMaximo">Valor Máximo:</label>
+          <input
+            matInput
+            class="form-control"
+            name="valorConsultaMaximo"
+            id="valorConsultaMaximo"
+            formControlName="valorConsultaMaximo"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <label for="valorConsultaMinimo">Valor Mínimo:</label>
+          <input
+            matInput
+            class="form-control"
+            name="valorConsultaMinimo"
+            id="valorConsultaMinimo"
+            formControlName="valorConsultaMinimo"
+          />
+        </mat-form-field>
+
+        <div id="ativo" class="row">
+          <label class="radio-inline">Situação:</label>
+          <div *ngFor="let item of ativoOption">
+            <label class="radio-inline"></label>
+            <input
+              type="radio"
+              [value]="item.value"
+              class="form-control"
+              name="ativo"
+              id="ativo"
+              formControlName="ativo"
+            />
+            {{ item.desc }}
+          </div>
         </div>
       </div>
     </div>

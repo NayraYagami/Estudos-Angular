@@ -34,3 +34,13 @@ table {
 #buttonDelete {
   color: #753f65;
 }
+
+.radio {
+  display: flex;
+  margin-block-end: 30px;
+  margin-inline: 1rem;
+}
+
+.row {
+  margin-right: 7.5rem;
+}

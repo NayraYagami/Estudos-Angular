@@ -11,3 +11,8 @@
 .validation-message {
   color: red;
 }
+
+.row {
+  margin-block-end: 30px;
+  margin-inline: 1rem;
+}

@@ -75,35 +75,37 @@
         />
       </mat-form-field>
 
-      <div id="ativo" class="row">
-        <label class="radio-inline">Situação:</label>
-        <div *ngFor="let item of ativoOption">
-          <label class="radio-inline"></label>
-          <input
-            type="radio"
-            [value]="item.value"
-            class="form-control"
-            name="ativo"
-            id="ativo"
-            formControlName="ativo"
-          />
-          {{ item.desc }}
+      <div class="radio">
+        <div id="sexo" class="row">
+          <label class="radio-inline">Sexo:</label>
+          <div *ngFor="let item of sexoOption">
+            <label class="radio-inline"></label>
+            <input
+              type="radio"
+              [value]="item.value"
+              class="form-control"
+              name="sexo"
+              id="sexo"
+              formControlName="sexo"
+            />
+            {{ item.desc }}
+          </div>
         </div>
-      </div>
 
-      <div id="sexo" class="row">
-        <label class="radio-inline">Sexo:</label>
-        <div *ngFor="let item of sexoOption">
-          <label class="radio-inline"></label>
-          <input
-            type="radio"
-            [value]="item.value"
-            class="form-control"
-            name="sexo"
-            id="sexo"
-            formControlName="sexo"
-          />
-          {{ item.desc }}
+        <div id="ativo" class="row">
+          <label class="radio-inline">Situação:</label>
+          <div *ngFor="let item of ativoOption">
+            <label class="radio-inline"></label>
+            <input
+              type="radio"
+              [value]="item.value"
+              class="form-control"
+              name="ativo"
+              id="ativo"
+              formControlName="ativo"
+            />
+            {{ item.desc }}
+          </div>
         </div>
       </div>
     </div>

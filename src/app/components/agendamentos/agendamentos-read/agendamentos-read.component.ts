@@ -79,7 +79,7 @@ export class AgendamentosReadComponent implements OnInit {
   }
 
   navigateToAgendamentosForm() {
-    this.router.navigate(['/agendamentos/form']);
+    this.router.navigate(['agendamentos/form']);
   }
 
   getAtivo() {

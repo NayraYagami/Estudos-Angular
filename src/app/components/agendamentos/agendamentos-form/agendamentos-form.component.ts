@@ -35,12 +35,8 @@ export class AgendamentosFormComponent implements OnInit {
       dataConsulta: [null, [Validators.required]],
       dataCancelamento: [''],
       valorConsulta: ['', [Validators.required]],
-      cliente: this.formBuilder.group({
-        id: ['', [Validators.required]],
-      }),
-      medico: this.formBuilder.group({
-        id: ['', [Validators.required]],
-      }),
+      clienteId: ['', [Validators.required]],
+      medicoId: ['', [Validators.required]],
     });
   }
 
